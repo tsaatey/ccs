@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "ircmaxell/random-lib": "^1.2",
+        "ip2location/ip2location-php": "8.0.2"
+    }
+}

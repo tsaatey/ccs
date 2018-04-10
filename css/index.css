@@ -1,0 +1,129 @@
+/*html {
+    background: url(../images/shopping-2.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+
+#ccs_image {
+    width: 130px;
+    height: 100px;
+}
+
+#brand_name{
+    font-family: Tahoma;
+    font-size: 30px;
+    line-height: 60px;
+    font-weight: bold;
+}
+
+#background_div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/shopping-2.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.3;
+    filter: alpha(opacity = 30);
+}
+
+#wrapper {
+    padding-top: 10%; 
+    max-width: 100%;
+    display: block;
+}
+
+#login_form {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: 400px;
+    background-color: gray;
+    text-align: center;
+}
+
+#centering {
+    display: block;
+    margin: 0 auto;
+    padding-top: 14%;
+}
+
+#user_login_text p {
+    text-align: center;
+    font-family: Tahoma;
+    font-size: 26px;
+    font-weight: bolder;
+    color: #000000;
+    padding-top: 10%;
+}
+
+#server_form {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: 400px;
+    background-color: gray;
+    text-align: center;
+}
+
+#server_login_text p {
+    text-align: center;
+    font-family: Tahoma;
+    font-size: 26px;
+    font-weight: bolder;
+    color: #000000;
+    padding-top: 10%;
+}
+
+#server_centering {
+    display: block;
+    margin: 0 auto;
+    padding-top: 6%;
+}
+
+#_error{
+    color: #c12e2a;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#reset_password_area {
+    display: none;
+    margin: 0 auto;
+    width: 500px;
+    height: 400px;
+    background-color: gray;
+    text-align: center;
+}
+
+#_password_reset_centering {
+    display: block;
+    margin: 0 auto;
+    padding-top: 14%;
+}
+
+#password_reset_text p{
+    text-align: center;
+    font-family: Tahoma;
+    font-size: 26px;
+    font-weight: bolder;
+    color: #000000;
+    padding-top: 10%;
+}
+
+#forgot_password_note{
+    color: blue;
+    font-family: Tahoma;
+    font-size: 16px;
+}
+
+#forgot_password_note:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
