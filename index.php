@@ -27,6 +27,7 @@ if (file_exists($hostFile)) {
         <script defer src="js/fontawesome-all.js"></script>
         <script src="node_modules/sweetalert2/dist/sweetalert2.all.js" type="text/javascript"></script>
         <link href="node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
+        
         <title>CCS Login</title>
     </head>
     <body>
@@ -205,5 +206,6 @@ if (file_exists($hostFile)) {
         <script src = "js/jquery.min.js"></script>
         <script src = "js/index.js" type = "text/javascript"></script>
         <script src = "js/bootstrap.min.js"></script>
+        <script src="node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
     </body>
 </html>

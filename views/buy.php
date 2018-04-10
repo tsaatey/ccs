@@ -14,6 +14,8 @@ session_start();
         <link href="../css/buy.css" rel="stylesheet" type="text/css"/>
         <script src="../node_modules/sweetalert2/dist/sweetalert2.all.js" type="text/javascript"></script>
         <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../material-icons-0.2.1/css/material-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../node_modules/materialize-css/dist/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection"/>
         <title>Billing portal</title>
     </head>
     <body>
@@ -250,5 +252,6 @@ session_start();
         <script src = "../js/bootstrap.min.js"></script>
         <script defer src="../js/fontawesome-all.js"></script>
         <script src="../js/buy.js" type="text/javascript"></script>
+        <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
     </body>
 </html>
