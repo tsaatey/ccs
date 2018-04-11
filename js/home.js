@@ -31,9 +31,9 @@
             $('#new_user').addClass('selected');
             $('#user_delete').removeClass('selected');
             $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
         });
-    }
-    ;
+    };
 
     var addUser = document.getElementById('delete_user');
     if (addUser) {
@@ -49,6 +49,7 @@
             $('#new_user').removeClass('selected');
             $('#user_delete').addClass('selected');
             $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
         });
     }
     ;
@@ -67,6 +68,7 @@
             $('#new_user').removeClass('selected');
             $('#user_delete').removeClass('selected');
             $('#reset_account').addClass('selected');
+            $('#change_admin_pass').removeClass('selected');
         });
     }
     ;
@@ -86,6 +88,7 @@
             $('#new_user').removeClass('selected');
             $('#user_delete').removeClass('selected');
             $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
 
         });
     }
@@ -104,7 +107,7 @@
             $('#new_user').removeClass('selected');
             $('#user_delete').removeClass('selected');
             $('#reset_account').removeClass('selected');
-            $('#change_admin').addClass('selected');
+            $('#change_admin_pass').addClass('selected');
         });
     }
 

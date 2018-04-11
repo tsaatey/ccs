@@ -15,7 +15,7 @@ if (file_exists($hostFile)) {
 ?>
 
 <!DOCTYPE html>
-<htm>
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,14 +27,15 @@ if (file_exists($hostFile)) {
         <script defer src="js/fontawesome-all.js"></script>
         <script src="node_modules/sweetalert2/dist/sweetalert2.all.js" type="text/javascript"></script>
         <link href="node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
-        
+        <link href="material-icons-0.2.1/iconfont/material-icons.css" rel="stylesheet" type="text/css"/>
+        <link href="node_modules/materialize-css/dist/css/materialize.css" rel="stylesheet" type="text/css"/>
         <title>CCS Login</title>
     </head>
     <body>
-        <nav class = "navbar navbar-inverse navbar-fixed-top">
-            <div class = "container">
-                <img class="navbar-brand navbar-static-top img-responsive" src="images/Credit-Card.png" id="ccs_image"/>
-                <a class = "navbar-brand navbar-static-top" href = "#" id = "brand_name" style="color: #fff;">CreditCard Shield</a>
+        <nav>
+            <div class="nav-wrapper">
+                <span><img src="images/Credit-Card.png" width="50" id="ccs_image"/></span>
+                <a href="#"><span style="text-decoration: none; color: #ffffff; font-size: 25px;">CreditCard Shield</span></a>
             </div>
         </nav>
         <div id = "background_div"></div>
@@ -42,50 +43,56 @@ if (file_exists($hostFile)) {
             <?php
             if (file_exists($filePath)) {
                 ?>
-                <div id = "login_form">
+                <div class="row card-panel" id="login_form">
                     <div id = "user_login_text">
                         <p>User Login</p>
                     </div>
-                    <div id = "centering">
-                        <p id = "error_element" style="color: red; font-family: Tahoma; font-weight: bold; font-size: 18px;">
-                            <?php
-                            if (isset($_GET['wrong_username_password']) || isset($_GET['username_password_invalid']) || isset($_GET['invalid_email']) || isset($_GET['username=&password=&login_button='])) {
-                                echo 'Invalid username or password!';
-                            }
-                            ?>
-                        </p>
-
-                        <form class = "form-horizontal" role ="form" id="user_login_form">
-                            <div class = "form-group">
-                                <label class = "control-label col-sm-2 col-sm-offset-2" for = "username">Username</label>
-                                <div class = "col-md-6">
-                                    <input type = "email" class = "form-control input-sm" name = "username" id="username" placeholder = "Username/email eg. rich@gmail.com"/>
-                                </div>
-                            </div>
-                            <div class = "form-group" >
-                                <label class = "control-label col-sm-2 col-sm-offset-2" for = "password" >Password</label>
-                                <div class = "col-md-6">
-                                    <input type = "password" class = "form-control input-sm" name = "password" id="password" placeholder = "Password"/>
-                                </div>
-                            </div>
-                            <div class = "form-group" >
-                                <div class = "col-sm-2 col-sm-offset-6">
-                                    <button type = "submit" class = "form-control btn btn-default" name = "login_button" id = "login_button">Login</button>
-                                </div>
-                            </div>
-                            <?php
-                            if (isset($_SESSION['forgot_password']) && $_SESSION['forgot_password'] == 1) {
-                                ?>
-                                <div class = "form-group" >
-                                    <div class = "col-sm-6 col-sm-offset-4 ">
-                                        <p id="forgot_password_note">I have forgotten my password</p>
-                                    </div>
-                                </div>
+                    <div class="col l12 m5" id="centering">
+                        <div class="">
+                            <p id = "error_element" style="color: red; font-family: Tahoma; font-weight: bold; font-size: 18px;">
                                 <?php
-                            }
-                            ?>
-
-                        </form>
+                                if (isset($_GET['wrong_username_password']) || isset($_GET['username_password_invalid']) || isset($_GET['invalid_email']) || isset($_GET['username=&password=&login_button='])) {
+                                    echo 'Invalid username or password!';
+                                }
+                                ?>
+                            </p>
+                            <div class="row">
+                                <form class="col s12" id="user_login_form">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="username" type="text" name="username" class="validate">
+                                            <label for="username" style="color: #ffffff;">Username</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">person_pin_circle</i>
+                                            <input id="password" type="password" name="password" class="validate">
+                                            <label for="password" style="color: #ffffff;">Password</label>
+                                        </div>  
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field s3">
+                                            <button class="btn waves-effect waves-light" type="submit" name="login_button" id="login_button">Login
+                                                <i class="material-icons right">lock_open</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if (isset($_SESSION['forgot_password']) && $_SESSION['forgot_password'] == 1) {
+                                        ?>
+                                        <div class = "form-group" >
+                                            <div class = "col-sm-6 col-sm-offset-4 ">
+                                                <p id="forgot_password_note">I have forgotten my password</p>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <?php

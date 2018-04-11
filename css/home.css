@@ -16,12 +16,13 @@ and open the template in the editor.
 
 body{
     font-family: "Tahoma";
+    background-color: #95a5a6;
 }
 
 div#header{
     width: 100%;
     height: 50px;
-    background-color: #000000;
+    background-color: #008975;
     margin: 0 auto;
 }
 
@@ -83,7 +84,7 @@ div#container{
     width: 250px;
     height: 100%;
     float: left;
-    background-color: #2c3e50;  
+    background-color: #00BF9A;  
 }
 
 ul#nav{
@@ -94,18 +95,25 @@ ul#nav li{
     list-style: none;
 }
 
+ul#nav li a:first-of-type{
+    border-top: #ffffff;
+}
+
 ul#nav li a{
-    color: #cccccc;
+    color: #ffffff;
     font-size: 1.2em;
+    font-weight: normal;
     padding: 10px;
     display: block;
     text-decoration: none;
-    border-bottom: 1px solid #0a0a0a;
+    border-bottom: 2px solid #ffffff;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
     -o-transition: 0.2s;
     transition: 0.2s;
 }
+
+
 
 ul#nav li a:hover{
     background-color: #778899;
@@ -113,7 +121,7 @@ ul#nav li a:hover{
 }
 
 ul#nav li a.selected{
-    background-color: #778899;
+    background-color: #95a5a6;
     color: #fff;
 }
 
@@ -136,7 +144,7 @@ div.box{
 div.box .box-top{
     color: #fff;
     text-shadow: 0px 1px 1px solid #000;
-    background-color: #2980b9;
+    background-color: #009688;
     padding: 5px;
     padding-left: 15px;
     font-weight: 300;
@@ -247,4 +255,12 @@ div#account_reset_area{
 
 #ceo_card_company_area{
     display: none;
+}
+
+#header_display{
+    font-size: 25px;
+}
+
+.btn-floating{
+    background-color: #008975;
 }

@@ -21,7 +21,7 @@ require_once '../controllers/GenerateReport.php';
         <script src="../node_modules/sweetalert2/dist/sweetalert2.all.js" type="text/javascript"></script>
         <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
         <script src="../js/alerts.js" type="text/javascript"></script>
-        <link href="../material-icons-0.2.1/css/material-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../material-icons-0.2.1/iconfont/material-icons.css" rel="stylesheet" type="text/css"/>
         <link href="../node_modules/materialize-css/dist/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection"/>
         <?php
         if (!isset($_SESSION['setup_account']) || $_SESSION['setup_account'] == 0) {
@@ -69,7 +69,7 @@ require_once '../controllers/GenerateReport.php';
                             <li id="add_user"><a href="#" id="new_user">Add User</a></li>
                             <li id="delete_user"><a href="#" id="user_delete">Delete User</a></li>
                             <li id="account_reset"><a href="#" id="reset_account">Reset User Account</a></li>
-                            <li id="change_admin"><a href="#" id="change_admin">Change Admin Password</a></li>
+                            <li id="change_admin"><a href="#" id="change_admin_pass">Change Admin Password</a></li>
                         </ul>
                     </div>
                     <div class="content">
@@ -400,7 +400,18 @@ require_once '../controllers/GenerateReport.php';
                                 </div>
                             </div>
                         </div>
-                    </div>          
+                    </div>
+                    <div class="fixed-action-btn">
+                        <a class="btn-floating btn-large">
+                            <i class="large material-icons">mode_edit</i>
+                        </a>
+                        <ul>
+                            <li><a class="btn-floating red"><i class="material-icons">add</i></a></li>
+                            <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                            <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
+                        </ul>
+                    </div>
                 </div><!-- End of administrator's home page-->
                 <?php
             } else if ($_SESSION['roleId'] == 2) {
@@ -893,6 +904,17 @@ require_once '../controllers/GenerateReport.php';
                         <?php
                     }
                     ?>
+                    <div class="fixed-action-btn">
+                        <a class="btn-floating btn-large">
+                            <i class="large material-icons">mode_edit</i>
+                        </a>
+                        <ul>
+                            <li><a class="btn-floating red"><i class="material-icons">add</i></a></li>
+                            <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                            <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
+                        </ul>
+                    </div>
                 </div><!-- End of employee's home page-->
                 <?php
             } else if ($_SESSION['roleId'] == 3) {
@@ -1204,10 +1226,10 @@ require_once '../controllers/GenerateReport.php';
                                 ?>
 
                                      ">
-                                    <?php 
-                                        $report = new GenerateReport("P");
-                                        $report->getDailyTransactionReport();
-                                    ?>
+                                         <?php
+                                         $report = new GenerateReport("P");
+                                         $report->getDailyTransactionReport();
+                                         ?>
                                 </div>
                             </div>
                         </div>
@@ -1563,7 +1585,11 @@ require_once '../controllers/GenerateReport.php';
             </div>
         </div>
     </div>
-
+    <script>
+        $(document).ready(function () {
+            $('.fixed-action-btn').floatingActionButton();
+        });
+    </script>
 
     <script src = "../js/jquery.min.js"></script>
     <script src = "../js/bootstrap.min.js"></script>
