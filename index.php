@@ -44,7 +44,7 @@ if (file_exists($hostFile)) {
             if (file_exists($filePath)) {
                 ?>
                 <div class="row card-panel" id="login_form">
-                    <div id = "user_login_text">
+                    <div class="card-title" id = "user_login_text">
                         <p>User Login</p>
                     </div>
                     <div class="col l12 m5" id="centering">
@@ -73,36 +73,36 @@ if (file_exists($hostFile)) {
                                         </div>  
                                     </div>
                                     <div class="row">
-                                        <div class="input-field s3">
-                                            <button class="btn waves-effect waves-light" type="submit" name="login_button" id="login_button">Login
+                                        <div class="input-field l8" style="padding-left: 40px;">
+                                            <button class="btn index_buttons btn-large waves-effect waves-light" type="submit" name="login_button" id="login_button">Login
                                                 <i class="material-icons right">lock_open</i>
                                             </button>
                                         </div>
                                     </div>
-                                    <?php
-                                    if (isset($_SESSION['forgot_password']) && $_SESSION['forgot_password'] == 1) {
-                                        ?>
-                                        <div class = "form-group" >
-                                            <div class = "col-sm-6 col-sm-offset-4 ">
-                                                <p id="forgot_password_note">I have forgotten my password</p>
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-action">
+                        <?php
+                        if (isset($_SESSION['forgot_password']) && $_SESSION['forgot_password'] == 1) {
+                            ?>
+                            <a href="#" id="forgot_password_note">I have forgotten my password</a>
+                            <?php
+                        } else {
+                            echo 'Login to access your account';
+                        }
+                        ?>
                     </div>
                 </div>
                 <?php
             } else {
                 ?>   
-                <div id = "server_form">
-                    <div id = "server_login_text">
+                <div class="row card-panel" id = "server_form">
+                    <div class="card-title" id = "server_login_text">
                         <p>Provide MySQL Credentials</p>
                     </div>
-                    <div id = "server_centering">
+                    <div class="col l12 m5" id = "server_centering">
                         <p id="_error" style="color: red; font-family: Tahoma; font-weight: bold; font-size: 18px;">
                             <?php
                             if (isset($_GET['wrong_credentials'])) {
@@ -115,28 +115,34 @@ if (file_exists($hostFile)) {
                             ?>
                         </p>
                         <p id = "error_element"></p>
-                        <form class = "form-horizontal" role ="form" id = "mysql_form">
-                            <div class = "form-group">
-                                <label class = "control-label col-sm-2 col-sm-offset-2" for = "host">Host</label>
-                                <div class = "col-md-6">
-                                    <input type = "text" class = "form-control input-sm" name = "host" id="host" placeholder = "your MySQL server host eg. localhost"/>
+                        <form class="col s12" id = "mysql_form">
+                            <div class = "row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">dns</i>
+                                    <input id="host" type="text" name="host" class="validate">
+                                    <label for="host" style="color: #ffffff;">MySQL Server host</label>
                                 </div>
                             </div>
-                            <div class = "form-group">
-                                <label class = "control-label col-sm-2 col-sm-offset-2" for = "server_username">Username</label>
-                                <div class = "col-md-6">
-                                    <input type = "text" class = "form-control input-sm" name = "server_username" id="server_username" placeholder = "your MySQL server username eg. root"/>
+                            <div class = "row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">person_circled</i>
+                                    <input id="server_username" type="text" name="server_username" class="validate">
+                                    <label for="server_username" style="color: #ffffff;">MySQL Server username</label>
                                 </div>
                             </div>
-                            <div class = "form-group" >
-                                <label class = "control-label col-sm-2 col-sm-offset-2" for = "server_password" >Password</label>
-                                <div class = "col-md-6">
-                                    <input type = "password" class = "form-control input-sm" name = "server_password" id="server_password" placeholder = "your MySQL server password"/>
+                            <div class = "row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">person_pin_circle</i>
+                                    <input id="server_password" type="text" name="server_password" class="validate">
+                                    <label for="server_password" style="color: #ffffff;">MySQL Server password</label>
                                 </div>
                             </div>
-                            <div class = "form-group" >
-                                <div class = "col-sm-3 col-sm-offset-5">
-                                    <button type = "submit" class = "form-control btn btn-default" name = "server_login_button" id = "server_login_button">Continue</button>
+                            <div class="row">
+                                <div class="col m0"></div>
+                                <div class="input-field l8" style="padding-left: 40px;">
+                                    <button class="btn index_buttons waves-effect btn-large waves-light" type="submit" name="server_login_button" id="server_login_button">Login to Server
+                                        <i class="material-icons right">lock_open</i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -145,18 +151,19 @@ if (file_exists($hostFile)) {
                 <?php
             }
             ?>
-            <div id="reset_password_area">
-                <div id = "password_reset_text">
+            <div class="row card-panel" id="reset_password_area">
+                <div class="card-title" id = "password_reset_text">
                     <p>Provide Your Email Adrress</p>
                     <h5>An email will be sent to the address. Please check your mail</h5>
                 </div>
                 <div id="_password_reset_centering">
                     <h5 id="username_error"></h5>
-                    <form class="form-horizontal" role="form" id="send_email_password_form">
-                        <div class = "form-group">
-                            <label class = "control-label col-sm-2 col-sm-offset-2" for = "username_to_reset">Email</label>
-                            <div class = "col-md-6">
-                                <input type = "email" class = "form-control input-sm" name = "username_to_reset" id="username_to_reset" placeholder = "Provide your email/username here"/>
+                    <form class="col s12" id="send_email_password_form">
+                        <div class = "row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">person_pin_circle</i>
+                                <input id="username_to_reset" type="email" name="username_to_reset" class="validate">
+                                <label for="username_to_reset" style="color: #ffffff;">Email</label>
                             </div>
                         </div>
                         <div class = "form-group" >
@@ -177,7 +184,6 @@ if (file_exists($hostFile)) {
                                     </td>
                                 </tr>
                             </table>
-
                         </div>
                     </form>
                 </div>

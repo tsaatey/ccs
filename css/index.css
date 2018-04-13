@@ -45,8 +45,8 @@ nav span img {
 #login_form {
     display: block;
     margin: 0 auto;
-    width: 500px;
-    height: 400px;
+    width: 550px;
+    height: 450px;
     background-color: #95a5a6;
     text-align: center;
 }
@@ -54,7 +54,6 @@ nav span img {
 #centering {
     display: block;
     margin: 0 auto;
-    padding-top: 1%;
 }
 
 #user_login_text p {
@@ -69,8 +68,8 @@ nav span img {
 #server_form {
     display: block;
     margin: 0 auto;
-    width: 500px;
-    height: 400px;
+    width: 590px;
+    height: 520px;
     background-color: gray;
     text-align: center;
 }
@@ -80,14 +79,17 @@ nav span img {
     font-family: Tahoma;
     font-size: 26px;
     font-weight: bolder;
-    color: #000000;
-    padding-top: 10%;
+    color: #ffffff;
+    padding-top: 1%;
+}
+
+.index_buttons{
+    width: 100%;
 }
 
 #server_centering {
     display: block;
     margin: 0 auto;
-    padding-top: 6%;
 }
 
 #_error{
@@ -100,8 +102,8 @@ nav span img {
 #reset_password_area {
     display: none;
     margin: 0 auto;
-    width: 500px;
-    height: 400px;
+    width: 550px;
+    height: 450px;
     background-color: gray;
     text-align: center;
 }
@@ -109,7 +111,6 @@ nav span img {
 #_password_reset_centering {
     display: block;
     margin: 0 auto;
-    padding-top: 14%;
 }
 
 #password_reset_text p{
@@ -118,7 +119,7 @@ nav span img {
     font-size: 26px;
     font-weight: bolder;
     color: #000000;
-    padding-top: 10%;
+    padding-top: 1%;
 }
 
 #forgot_password_note{
