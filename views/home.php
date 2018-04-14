@@ -179,7 +179,7 @@ require_once '../controllers/GenerateReport.php';
                                         echo 'block';
                                     }
                                     ?>">
-                                        <form class = "form-horizontal" role ="form" id="employee_form">
+                                        <form class="col s12" id="employee_form">
                                             <h5 id="form_error" style="font-family: Tahoma; color: red;">
                                                 <?php
                                                 if (isset($_GET['something_went_wrong'])) {
@@ -194,22 +194,21 @@ require_once '../controllers/GenerateReport.php';
                                             <h5 id="add_user_error"></h5>
                                             <table>
                                                 <tr>
-                                                    <td class="form_labels">
-                                                        <label style="font-weight: normal; font-size: 16px;" for="firstname">First name</label>
-                                                    </td>
-                                                    <td class="form_inputs">
-                                                        <div class = "col-md-11">
-                                                            <input type = "text" class = "form-control" name = "firstname" id="firstname" required/>
+                                                    <td>
+                                                        <div class="input-field col s3">
+                                                            <i class="material-icons prefix">person</i>
+                                                            <input id="firstname" type="text" name="firstname" class="validate">
+                                                            <label for="firstname" style="color: #000;">First name</label>
                                                         </div>
+
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="form_labels">
-                                                        <label style="font-weight: normal; font-size: 16px;" for="lastname">Last name</label>
-                                                    </td>
-                                                    <td class="form_inputs">
-                                                        <div class = "col-md-11">
-                                                            <input type = "text" class = "form-control" name = "lastname" id="lastname" required/>
+                                                        <div class="input-field col s3">
+                                                            <i class="material-icons prefix">person</i>
+                                                            <input id="lasttname" type="text" name="lasttname" class="validate">
+                                                            <label for="lasttname" style="color: #000;">Last name</label>
                                                         </div>
                                                     </td>
                                                 </tr>

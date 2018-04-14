@@ -146,7 +146,12 @@
                 form.method = 'POST';
                 form.submit();
             } else {
-                displayErrorMessage('add_user_error', 'All fields are required!');
+                swal({
+                    title: 'Validation Error',
+                    text: 'All fields are required!',
+                    type: 'error'
+                    
+                });
             }
         });
     }

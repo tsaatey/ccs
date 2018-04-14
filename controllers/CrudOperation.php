@@ -61,7 +61,7 @@ class CrudOperation {
                     ]);
                     if ($query->rowCount() > 0) {
                         $_SESSION['email_sent'] = 0;
-                        header("Location: ../views/home.php");
+                        header("Location: ../views/dashboard.php");
                         exit();
                     } else {
                         $_SESSION['forgot_password'] = 1;
@@ -91,7 +91,7 @@ class CrudOperation {
                     if ($query->rowCount() > 0) {
                         $_SESSION['account_reset'] = 1;
                     }
-                    header("Location: ../views/home.php");
+                    header("Location: ../views/dashboard.php");
                     $_SESSION['last_activity'] = time();
                     exit();
                 } else {
@@ -257,12 +257,12 @@ class CrudOperation {
 
         if ($query->rowCount() > 0) {
             ?>
-            <table class = "table table bordered" id="user_table">
+            <table class = "table table-bordered" id="user_table">
                 <tr>
                     <th>Name of Employee</th>
-                    <th style="padding-left: 60px;">Phone Number</th>
-                    <th style="padding-left: 50px;">Email Address</th>
-                    <th style="padding-right: 160px; padding-left: 50px;">Residential Address</th>
+                    <th style="padding-left: 110px;">Phone Number</th>
+                    <th style="padding-left: 70px;">Email Address</th>
+                    <th style="padding-right: 140px; padding-left: 100px;">Residential Address</th>
                     <th></th>
                 </tr>
             </table>
@@ -279,7 +279,7 @@ class CrudOperation {
                             <td style="padding-left: 40px; padding-top: 15px;"><?php echo $result['Phone number']; ?></td>
                             <td style="padding-left: 40px; padding-top: 15px;"><?php echo $result['Email address']; ?></td>
                             <td id="address_column" style="padding-left: 35px; padding-top: 15px;"><?php echo $result['Residential address']; ?></td>
-                            <td id="button_column"><button type="button" class="btn btn-info delete confirm" onclick="displayConfirmAlert('Delete this user?', 'delete_user', '<?php echo $result['id'] ?>', '<?php echo $result['Email address'] ?>', 'You won\'t be able to revert this!', 'delete it');">Delete</button></td>
+                            <td id="button_column"><button style="background-color: #008975;" type="button" class="btn delete confirm" onclick="displayConfirmAlert('Delete this user?', 'delete_user', '<?php echo $result['id'] ?>', '<?php echo $result['Email address'] ?>', 'You won\'t be able to revert this!', 'delete it');">Delete</button></td>
                             </tr>
                         </table>
                     </form>
