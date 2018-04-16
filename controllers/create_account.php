@@ -23,10 +23,10 @@ if(!empty(filter_input(INPUT_POST, 'user_mail')) && !empty(filter_input(INPUT_PO
     if($crud->createAccount($account)){
         $_SESSION['user_mail'] = ''; 
         $_SESSION['setup_account'] = 0;
-        header("Location: ../views/home.php");
+        header("Location: ../views/dashboard.php");
     }else {
-        header("Location: ../views/home.php?account_error=1");
+        header("Location: ../views/dashboard.php?account_error=1");
     }
 } else {
-    header("Location: ../views/home.php?empty_password=1");
+    header("Location: ../views/dashboard.php?empty_password=1");
 }

@@ -16,101 +16,6 @@
         h1.innerHTML = text;
     };
 
-    // method to show add user form
-    var addUser = document.getElementById('add_user');
-    if (addUser) {
-        addUser.addEventListener('click', () => {
-            setHeader('Add User');
-            displayClickedMenu('delete_user_area', 'none');
-            displayClickedMenu('add_user_area', 'block');
-            displayClickedMenu('account_reset_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('change_admin_password', 'none');
-            $('#change_admin').removeClass('selected');
-            $("#dashboard").removeClass('selected');
-            $('#new_user').addClass('selected');
-            $('#user_delete').removeClass('selected');
-            $('#reset_account').removeClass('selected');
-            $('#change_admin_pass').removeClass('selected');
-        });
-    };
-
-    var addUser = document.getElementById('delete_user');
-    if (addUser) {
-        addUser.addEventListener('click', () => {
-            setHeader('Delete User');
-            displayClickedMenu('delete_user_area', 'block');
-            displayClickedMenu('add_user_area', 'none');
-            displayClickedMenu('account_reset_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('change_admin_password', 'none');
-            $('#change_admin').removeClass('selected');
-            $("#dashboard").removeClass('selected');
-            $('#new_user').removeClass('selected');
-            $('#user_delete').addClass('selected');
-            $('#reset_account').removeClass('selected');
-            $('#change_admin_pass').removeClass('selected');
-        });
-    }
-    ;
-
-    var addUser = document.getElementById('account_reset');
-    if (addUser) {
-        addUser.addEventListener('click', () => {
-            setHeader('Reset User Account');
-            displayClickedMenu('delete_user_area', 'none');
-            displayClickedMenu('add_user_area', 'none');
-            displayClickedMenu('account_reset_area', 'block');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('change_admin_password', 'none');
-            $('#change_admin').removeClass('selected');
-            $("#dashboard").removeClass('selected');
-            $('#new_user').removeClass('selected');
-            $('#user_delete').removeClass('selected');
-            $('#reset_account').addClass('selected');
-            $('#change_admin_pass').removeClass('selected');
-        });
-    }
-    ;
-
-    var addUser = document.getElementById('admin_dashboard');
-    if (addUser) {
-        addUser.addEventListener('click', () => {
-            setHeader('Dashboard');
-            displayClickedMenu('delete_user_area', 'none');
-            displayClickedMenu('add_user_area', 'none');
-            displayClickedMenu('account_reset_area', 'none');
-            displayClickedMenu('dashboard_area', 'block');
-            displayClickedMenu('change_admin_password', 'none');
-            displayInstructions('dashboard_activity_heading', 'Users');
-            $('#change_admin').removeClass('selected');
-            $("#dashboard").addClass('selected');
-            $('#new_user').removeClass('selected');
-            $('#user_delete').removeClass('selected');
-            $('#reset_account').removeClass('selected');
-            $('#change_admin_pass').removeClass('selected');
-
-        });
-    }
-    ;
-
-    var resetAdminPassword = document.getElementById('change_admin');
-    if (resetAdminPassword) {
-        resetAdminPassword.addEventListener('click', function () {
-            setHeader('Change Admin Passowrd');
-            displayClickedMenu('delete_user_area', 'none');
-            displayClickedMenu('add_user_area', 'none');
-            displayClickedMenu('account_reset_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('change_admin_password', 'block');
-            $("#dashboard").removeClass('selected');
-            $('#new_user').removeClass('selected');
-            $('#user_delete').removeClass('selected');
-            $('#reset_account').removeClass('selected');
-            $('#change_admin_pass').addClass('selected');
-        });
-    }
-
     let displayClickedMenu = (id, displayMode) => {
         var element = document.getElementById(id);
         element.style.display = displayMode;
@@ -130,9 +35,11 @@
             firstname: getFormData('firstname'),
             lastname: getFormData('lastname'),
             dateOfBirth: getFormData('dob'),
+            gender: getFormData('gender'),
             phone: getFormData('phone'),
             email: getFormData('email'),
-            address: getFormData('address')
+            address: getFormData('address'),
+            roleId: getFormData('roleId')
         };
     };
 
@@ -141,16 +48,70 @@
         saveEmployeeButton.addEventListener('click', () => {
             var employee = getEmployeeDataObject();
             if (employee.firstname !== '' && employee.lastname !== '' && employee.dateOfBirth !== '' && employee.phone !== '' && employee.email !== '' && employee.address !== '') {
-                var form = document.getElementById('employee_form');
-                form.action = '../controllers/save_employee_data.php';
-                form.method = 'POST';
-                form.submit();
+//                var form = document.getElementById('add_user_form');
+//                form.action = '../controllers/save_employee_data.php';
+//                form.method = 'POST';
+//                form.submit();
+
+                swal({
+                    title: "Uploading information...",
+                    text: "Please wait",
+                    imageUrl: "../images/ajax_loader_blue_64.gif",
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
+                $.ajax({
+                    url: '../controllers/save_employee_data.php',
+                    method: 'POST',
+                    data: {firstname: employee.firstname, lastname: employee.lastname, gender: employee.gender, dob: employee.dateOfBirth, phone: employee.phone, email: employee.email, address: employee.address, roleId: employee.roleId},
+                    complete: function (response) {
+                        if (response.responseText === 'employee_saved') {
+                            swal({
+                                title: 'Success',
+                                text: 'Employee saved!',
+                                type: 'success'
+
+                            });
+
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 3000);
+                        }
+
+                        if (response.responseText === 'something_went_wrong') {
+                            swal({
+                                title: 'Error',
+                                text: 'Internal error occured! Please try again',
+                                type: 'error'
+
+                            });
+                        }
+
+                        if (response.responseText === 'invalid_email') {
+                            swal({
+                                title: 'Validation Error',
+                                text: 'The email address provided is not valid',
+                                type: 'error'
+
+                            });
+                        }
+
+                        if (response.responseText === 'empty_fields') {
+                            swal({
+                                title: 'Validation Error!',
+                                text: 'All fields are required!',
+                                type: 'error'
+
+                            });
+                        }
+                    }
+                });
             } else {
                 swal({
                     title: 'Validation Error',
-                    text: 'All fields are required!',
+                    text: 'Provide values for all fields!',
                     type: 'error'
-                    
+
                 });
             }
         });
@@ -635,7 +596,7 @@
                                         $('#card_company').val('');
                                     }, 2000);
 
-                                } else if (response === 'database_error'){
+                                } else if (response === 'database_error') {
                                     swal(
                                             "Error!",
                                             "Database error occured", // had a missing comma

@@ -10,7 +10,7 @@ require_once 'CrudOperation.php';
 
 if ($_SESSION['setup_account'] == 1 || $_SESSION['card_holder_account_in_progress'] == 1) {
     $_SESSION['account_setup_required'] = 1;
-    header("Location: ../views/home.php");
+    header("Location: ../views/dashboard.php");
 } else {
     session_destroy();
     header("Location: ../index.php");

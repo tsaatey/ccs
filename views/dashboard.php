@@ -11,8 +11,6 @@ require_once '../controllers/CrudOperation.php';
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -25,6 +23,13 @@ require_once '../controllers/CrudOperation.php';
         <link href="../material-icons-0.2.1/iconfont/material-icons.css" rel="stylesheet" type="text/css"/>
         <link href="../node_modules/materialize-css/dist/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection"/>
         <link href="../css/dashboard.css" rel="stylesheet" type="text/css"/>
+        <?php
+        if (!isset($_SESSION['setup_account']) || $_SESSION['setup_account'] == 0) {
+            ?>
+            <script src="../js/auto_logout.js" type="text/javascript"></script>
+            <?php
+        }
+        ?>
         <title>Dashboard</title>
     </head>
     <body>
@@ -37,7 +42,7 @@ require_once '../controllers/CrudOperation.php';
                 if (!empty($_SESSION['roleId'])) {
                     ?>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="#!"><i class="material-icons left">person</i><?php echo $_SESSION['firstname'] ?></a>/li>
+                        <li><a href="#!"><i class="material-icons left">person</i><?php echo $_SESSION['firstname'] ?></a></li>
                         <li><a href="../controllers/logout.php">Logout</a></li>
                     </ul>
                     <?php
@@ -51,16 +56,30 @@ require_once '../controllers/CrudOperation.php';
             <div class="col l2">
                 <ul id="slide-out" class="sidenav sidenav-fixed">
                     <div class="sidebar sticky">
-                        <ul id="nav">
-                            <li id="admin_dashboard"><a href="#" class="selected" id="dashboard">Dashboard</a></li>
-                            <li id="admin_add_user"><a href="../pages/add_user.php" id="admin_new_user" target="content-area">Add User</a></li>
-                            <li id="delete_user"><a href="../pages/delete_user.php" target="content-area" id="user_delete">Delete User</a></li>
-                            <li id="account_reset"><a href="#" id="reset_account">Reset User Account</a></li>
-                            <li id="change_admin"><a href="#" id="change_admin_pass">Change Admin Password</a></li>
-                        </ul>
+                        <?php
+                        if (!empty($_SESSION['roleId'])) {
+                            if (empty($_SESSION['user_mail'])) {
+                                if ($_SESSION['roleId'] == 1) {
+
+                                    require_once '../menus/admin_menu.php';
+                                }
+
+                                if ($_SESSION['roleId'] == 2) {
+                                    // import employee menu here
+                                }
+
+                                if ($_SESSION['roleId'] == 3) {
+                                    // import customer menu here
+                                }
+
+                                if ($_SESSION['roleId'] == 4) {
+                                    require_once '../menus/ceo_menu.php';
+                                }
+                            }
+                        }
+                        ?>
                     </div>
                 </ul>
-                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
             <div class="col l8">
                 <div class="row">
@@ -81,8 +100,23 @@ require_once '../controllers/CrudOperation.php';
                             <div class="col l12 m5">
                                 <div class="card-panel" id="user_display">
                                     <?php
-                                    $crud = new CrudOperation();
-                                    $crud->retriveUserInfo();
+                                    if (!empty($_SESSION['user_mail'])) {
+                                        require_once '../pages/account_setup.php';
+                                    } else {
+                                        if ($_SESSION['roleId'] == 1) {
+                                            $crud = new CrudOperation();
+                                            $crud->retriveUserInfo();
+                                        }
+                                        
+                                        if ($_SESSION['roleId'] == 4) {
+                                            $crud = new CrudOperation();
+                                            if ($crud->displayTransactionsForToday() == false) {
+                                                echo 'No transaction has been recorded yet';
+                                            } else {
+                                                $crud->displayTransactionsForToday();
+                                            }
+                                        }
+                                    }
                                     ?>
                                 </div>
                             </div>
@@ -117,6 +151,14 @@ require_once '../controllers/CrudOperation.php';
             $(document).ready(function () {
                 $('.fixed-action-btn').floatingActionButton();
             });
+
+            $(document).ready(function () {
+                $('.collapsible').collapsible();
+            });
+            $(document).ready(function () {
+                $('.dropdown-trigger').dropdown();
+            });
+
         </script>
 
         <script src = "../js/jquery.min.js"></script>  

@@ -225,7 +225,7 @@ class CrudOperation {
 
         if ($query->rowCount() > 0) {
             ?>
-            <table class = "table table bordered" id="user_table">
+            <table class = "table table bordered striped" id="user_table">
                 <tr>
                     <th>Name of Employee</th>
                     <th>Phone Number</th>
@@ -272,13 +272,13 @@ class CrudOperation {
                 ?>
                 <div class="table-responsive">
                     <form class="form-horizontal delete_employee_form" role="form" name="delete_employee_form" id="delete_employee_form<?php echo $counter; ?>">
-                        <table class="table table bordered" id="user_delete_table">
+                        <table class="table table bordered striped" id="user_delete_table">
                             <tr>
                             <input type="hidden" id="employee_id<?php echo $counter ?>" value="<?php echo $result['id']; ?>"/>
-                            <td style="padding-top: 15px;"><?php echo $result['Employee name']; ?></td>
-                            <td style="padding-left: 40px; padding-top: 15px;"><?php echo $result['Phone number']; ?></td>
+                            <td style="padding-top: 15px; width: 250px;"><?php echo $result['Employee name']; ?></td>
+                            <td style="width: 150px; padding-top: 15px;"><?php echo $result['Phone number']; ?></td>
                             <td style="padding-left: 40px; padding-top: 15px;"><?php echo $result['Email address']; ?></td>
-                            <td id="address_column" style="padding-left: 35px; padding-top: 15px;"><?php echo $result['Residential address']; ?></td>
+                            <td id="address_column" style="padding-left: 35px; padding-top: 15px; width: 200px;"><?php echo $result['Residential address']; ?></td>
                             <td id="button_column"><button style="background-color: #008975;" type="button" class="btn delete confirm" onclick="displayConfirmAlert('Delete this user?', 'delete_user', '<?php echo $result['id'] ?>', '<?php echo $result['Email address'] ?>', 'You won\'t be able to revert this!', 'delete it');">Delete</button></td>
                             </tr>
                         </table>
@@ -325,9 +325,9 @@ class CrudOperation {
             ?>
             <table class = "table table bordered" id="user_table">
                 <tr>
-                    <th>Name of Account Holder</th>
-                    <th style="padding-right: 190px;">Email Address</th>
-                    <th>Status</th>
+                    <th style="width: 230px;">Name of Account Holder</th>
+                    <th style="width: 300px; padding-left: 25px;">Email Address</th>
+                    <th style="width: 200px; padding-right: 200px;">Status</th>
                 </tr>
             </table>
             <?php
@@ -336,11 +336,11 @@ class CrudOperation {
                 ?>
                 <div class="table-responsive">
                     <form class="form-horizontal delete_employee_form" role="form" name="dreset_account_form">
-                        <table class="table table bordered" id="user_delete_table">
+                        <table class="table table bordered striped" id="user_delete_table">
                             <tr>
-                                <td style="padding-top: 15px;"><?php echo $result['Employee name']; ?></td>
-                                <td style="padding-top: 15px; padding-right: 20px;"><?php echo $result['Email address']; ?></td>
-                                <td style="padding-top: 15px; padding-right: 20px;"><?php echo $result['status']; ?></td>
+                                <td style="padding-top: 15px; width: 300px;"><?php echo $result['Employee name']; ?></td>
+                                <td style="padding-top: 15px; width: 350px;"><?php echo $result['Email address']; ?></td>
+                                <td style="padding-top: 15px; width: 200px;"><?php echo $result['status']; ?></td>
                                 <td id="button_column"><button type="button" class="btn btn-info delete confirm" onclick="displayConfirmAlert('Reset this account?', 'reset_account', '', '<?php echo $result['Email address'] ?>', 'Password will be reset to default', 'reset it');">Reset</button></td>
                             </tr>
                         </table>
@@ -836,7 +836,7 @@ class CrudOperation {
 
             if ($query->rowCount() > 0) {
                 ?>
-                <table class = "table table-bordered table-responsive" id="user_table">
+                <table class = "table table-bordered table-responsive striped" id="user_table">
                     <tr>
                         <th>S/N</th>
                         <th>Name</th>
@@ -866,6 +866,7 @@ class CrudOperation {
                 </table>
                 <?php
             }
+            return false;
         } catch (Exception $ex) {
             die($ex->getMessage());
         }
@@ -883,7 +884,7 @@ class CrudOperation {
 
             if ($query->rowCount() > 0) {
                 ?>
-                <table class = "table table-bordered table-responsive" id="user_table">
+                <table class = "table table-bordered table-responsive striped" id="user_table">
                     <tr>
                         <th>S/N</th>
                         <th>Name</th>
@@ -913,6 +914,7 @@ class CrudOperation {
                 </table>
                 <?php
             }
+            return false;
         } catch (Exception $ex) {
             die($ex->getMessage());
         }

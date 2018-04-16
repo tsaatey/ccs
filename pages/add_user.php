@@ -3,9 +3,6 @@
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -34,7 +31,7 @@
     </head>
     <body>
         <div class="row user_doc">
-            <form class="col s12" id="add_user_form">
+            <form class="col s12" name="add_user_form" id="add_user_form">
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">person</i>
@@ -81,11 +78,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s8" style="margin-left: 40px; width: 600px;">
-                        <select class="browser-default" name="role" id="role">
+                        <select class="browser-default" name="roleId" id="roleId">
                             <option value="" disabled selected>Role</option>
-                            <option value="1">Adminstrator</option>
+                            <option value="1">Administrator</option>
                             <option value="4">CEO</option>
-                            <option value="4">Employee</option>
+                            <option value="2">Employee</option>
                         </select>
                     </div>  
                 </div>

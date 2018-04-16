@@ -37,15 +37,16 @@ if (!empty(filter_input(INPUT_POST, 'firstname')) && !empty(filter_input(INPUT_P
             $_SESSION['user_mail'] = $email;
             $_SESSION['user_role'] = $roleId;
             $_SESSION['setup_account'] = 1;
-            header("Location: ../views/home.php");
+            //echo 'employee_saved';
+            header("Location: ../views/dashboard.php");
             exit();
         } else {
-            header("Location: ../views/home.php?something_went_wrong=1");
+            echo 'something_went_wrong';
         }
     } else {
-        header("Location: ../views/home.php?worng_email=1");
+        echo 'invalid_email';
     }
 } else {
-    header("Location: ../views/home.php?empty_fileds=1");
+    echo 'empty_fields';
 }
 
