@@ -22,12 +22,15 @@ if (!empty(filter_input(INPUT_POST, 'firstname')) && !empty(filter_input(INPUT_P
     $address = filter_input(INPUT_POST, 'address');
     $roleId = filter_input(INPUT_POST, 'roleId');
 
+    $date = new DateTime($dateOfBirth);
+    $formattedDate = $date->format('Y-m-d');
+
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $employee->setId($id);
         $employee->setFirstname($firstname);
         $employee->setLastname($lastname);
         $employee->setGender($gender);
-        $employee->setDateOfBirth($dateOfBirth);
+        $employee->setDateOfBirth($formattedDate);
         $employee->setPhone($phone);
         $employee->setEmail($email);
         $employee->setAddress($address);

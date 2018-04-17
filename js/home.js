@@ -10,26 +10,22 @@
      * @param {type} text
      * @returns {undefined}
      */
-    // method to display menu header
+// method to display menu header
     let setHeader = (text) => {
         var h1 = document.getElementById('header_display');
         h1.innerHTML = text;
     };
-
     let displayClickedMenu = (id, displayMode) => {
         var element = document.getElementById(id);
         element.style.display = displayMode;
     };
-
     let displayInstructions = (id, text) => {
         var element = document.getElementById(id);
         element.innerHTML = text;
     };
-
     let getFormData = (id) => {
         return document.getElementById(id).value;
     };
-
     let getEmployeeDataObject = () => {
         return{
             firstname: getFormData('firstname'),
@@ -42,7 +38,6 @@
             roleId: getFormData('roleId')
         };
     };
-
     var saveEmployeeButton = document.getElementById('save_employee');
     if (saveEmployeeButton) {
         saveEmployeeButton.addEventListener('click', () => {
@@ -72,7 +67,6 @@
                                 type: 'success'
 
                             });
-
                             setTimeout(function () {
                                 location.reload(true);
                             }, 3000);
@@ -123,7 +117,6 @@
             confirmedPassword: getFormData('user_password_confirmed')
         };
     };
-
     var account_button = document.getElementById('create_account_button');
     if (account_button) {
         account_button.addEventListener('click', () => {
@@ -159,7 +152,7 @@
         element.style.fontWeight = 'normal';
         element.style.paddingLeft = '30px';
     };
-
+    
     /*
      * Function to validate passwords
      * Adopted from 'THE ART OF WEB'
@@ -169,7 +162,7 @@
         var regularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         return regularExpression.test(password);
     };
-
+    
     let validatePassword = () => {
         var pass = getAccountDetails();
         if (!checkPassword(pass.password)) {
@@ -177,7 +170,7 @@
         }
         return true;
     };
-
+    
     let validateAdminPassword = () => {
         var pass = getNewAdminPassword();
         if (!checkPassword(pass.admin_password)) {
@@ -185,7 +178,7 @@
         }
         return true;
     };
-
+    
     var account_button = document.getElementById('reset_password_button');
     if (account_button) {
         account_button.addEventListener('click', () => {
@@ -215,7 +208,6 @@
             confirmed_admin_password: getFormData('new_admin_password_confirmed')
         };
     };
-
     var adminPasswordResetButton = document.getElementById('admin_reset_password_button');
     if (adminPasswordResetButton) {
         adminPasswordResetButton.addEventListener('click', () => {
@@ -238,7 +230,6 @@
             }
 
         });
-
     }
 
     /*
@@ -261,7 +252,6 @@
             $('#ceo_account_settings_tab').removeClass('selected');
             $('#ceo_transaction_tab').addClass('selected');
             $('#ceo_basic_setup_tab').removeClass('selected');
-
         });
     }
 
@@ -282,7 +272,6 @@
             $('#ceo_account_settings_tab').removeClass('selected');
             $('#ceo_transaction_tab').removeClass('selected');
             $('#ceo_basic_setup_tab').removeClass('selected');
-
         });
     }
 
@@ -303,7 +292,6 @@
             $('#ceo_account_settings_tab').removeClass('selected');
             $('#ceo_transaction_tab').removeClass('selected');
             $('#ceo_basic_setup_tab').removeClass('selected');
-
         });
     }
 
@@ -324,7 +312,6 @@
             $('#ceo_account_settings_tab').removeClass('selected');
             $('#ceo_transaction_tab').removeClass('selected');
             $('#ceo_basic_setup_tab').removeClass('selected');
-
         });
     }
 
@@ -345,7 +332,6 @@
             $('#ceo_account_settings_tab').addClass('selected');
             $('#ceo_transaction_tab').removeClass('selected');
             $('#ceo_basic_setup_tab').removeClass('selected');
-
         });
     }
 
@@ -430,7 +416,6 @@
             secretAnswer: getFormData('secret_answer')
         };
     };
-
     var registerCardHolderButton = document.getElementById('create_card_holder_account_button');
     if (registerCardHolderButton) {
         registerCardHolderButton.addEventListener('click', function () {
@@ -442,6 +427,10 @@
                     && holder_details.email !== ''
                     && holder_details.nameOfKin !== ''
                     && holder_details.addressOfKin !== ''
+                    && holder_details.dob !== ''
+                    && holder_details.city !== ''
+                    && holder_details.country !== ''
+                    && holder_details.secretQuestion !== ''
                     && holder_details.kinContact !== ''
                     && holder_details.secretAnswer !== '') {
                 // get form id and submit data
@@ -449,10 +438,14 @@
                 cardHolderForm.action = '../controllers/save_card_holder_data.php';
                 cardHolderForm.method = 'POST';
                 cardHolderForm.submit();
-
             } else {
                 // display error message
-                displayErrorMessage('card_holder_form_error', 'Data cannot be submitted at this time. All fields are required!');
+                //displayErrorMessage('card_holder_form_error', 'Data cannot be submitted at this time. All fields are required!');
+                swal({
+                   title: 'Validation Error!',
+                   text: 'All fields are required',
+                   type: 'error'
+                });
             }
         });
     }
@@ -466,7 +459,6 @@
             card_issuer: getFormData('card_issuer')
         };
     };
-
     var creditCardButton = document.getElementById('create_card_details_submit');
     if (creditCardButton) {
         creditCardButton.addEventListener('click', function () {
@@ -476,46 +468,13 @@
                 creditCardForm.action = '../controllers/save_credit_card_details.php';
                 creditCardForm.method = 'POST';
                 creditCardForm.submit();
-
             } else {
                 displayErrorMessage('credit_card_error', 'Data cannot be submitted at this time. All fields are required!');
             }
         });
     }
 
-    var counter = 0;
-    var setupdisplay = document.getElementById('ceo_basic_setup');
-    if (setupdisplay) {
-        setupdisplay.addEventListener('click', function () {
-            counter += 1;
-            setHeader('Basic Setup');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_report_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#ceo_report_tab').removeClass('selected');
-            $('#ceo_card_application_tab').removeClass('selected');
-            $('#ceo_account_settings_tab').removeClass('selected');
-            $('#ceo_transaction_tab').removeClass('selected');
-            $('#ceo_basic_setup_tab').addClass('selected');
-
-            if (counter === 1) {
-                $('#ceo_add_card_company').css('display', 'block');
-                $('#ceo_add_questions').css('display', 'block');
-            } else if (counter === 2) {
-                $('#ceo_add_card_company').css('display', 'none');
-                $('#ceo_add_questions').css('display', 'none');
-                setHeader('Dashboard');
-                displayClickedMenu('dashboard_area', 'block');
-                counter = 0;
-            }
-
-        });
-    }
+    
 
     var addCardCompany = document.getElementById('ceo_add_card_company');
     if (addCardCompany) {
@@ -592,14 +551,13 @@
                                         timer: 2000
                                     });
                                     setTimeout(function () {
-                                        $('#image').val('');
+                                        $('#image1').val('');
                                         $('#card_company').val('');
                                     }, 2000);
-
                                 } else if (response === 'database_error') {
                                     swal(
                                             "Error!",
-                                            "Database error occured", // had a missing comma
+                                            "Database error occured",
                                             "error"
                                             );
                                 }
@@ -607,7 +565,7 @@
                             failure: function () {
                                 swal(
                                         "Error!",
-                                        "Information upload fails", // had a missing comma
+                                        "Information upload fails",
                                         "error"
                                         );
                             }
@@ -617,7 +575,7 @@
                     // image is empty
                     swal(
                             "Validation failed",
-                            "Please upload a company logo!.", // had a missing comma
+                            "Please upload a company logo!.",
                             "error"
                             );
                 }
@@ -625,7 +583,7 @@
                 // company name is empty
                 swal(
                         "Validation failed",
-                        "Please provide a company name!.", // had a missing comma
+                        "Please provide a company name!.",
                         "error"
                         );
             }
@@ -686,7 +644,6 @@
             }
         });
     }
-
 
 
 

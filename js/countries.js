@@ -246,9 +246,12 @@
             "Zimbabwe");
 
     var selectTag = document.getElementById('country');
+    selectTag.options[0] = new Option("Country", '-1');
+    selectTag.options[0].disabled = true;
+    selectTag.options[0].selected = true;
     for (var i = 0; i < countries.length; i++) {
         if (selectTag.options){
-            selectTag.options[i] = new Option(countries[i], countries[i]);
+            selectTag.options[i + 1] = new Option(countries[i], countries[i]);
         }
         
     }

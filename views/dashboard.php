@@ -31,6 +31,18 @@ require_once '../controllers/CrudOperation.php';
         }
         ?>
         <title>Dashboard</title>
+        <script>
+            function resizeIframe(obj) {
+                obj.style.height = obj.contentWindow.document.body.scrollHeight + 100 + 'px';
+            }
+            $('iframe').height( $('iframe').contents().outerHeight() );
+        </script>
+        <style>
+            body {
+                height: auto;
+                overflow: auto;
+            }
+        </style>
     </head>
     <body>
         <!-- Header -->
@@ -88,7 +100,7 @@ require_once '../controllers/CrudOperation.php';
                         </div>
                         <div class="col l10" id="cont">
                             <div id="iframe-top"></div>
-                            <iframe name="content-area" id="content-area" frameborder="0"></iframe>
+                            <iframe name="content-area" id="content-area" frameborder="0" onload="resizeIframe(this)"></iframe>
                         </div>
                         <div class="col l1">
                         </div>
@@ -107,7 +119,7 @@ require_once '../controllers/CrudOperation.php';
                                             $crud = new CrudOperation();
                                             $crud->retriveUserInfo();
                                         }
-                                        
+
                                         if ($_SESSION['roleId'] == 4) {
                                             $crud = new CrudOperation();
                                             if ($crud->displayTransactionsForToday() == false) {

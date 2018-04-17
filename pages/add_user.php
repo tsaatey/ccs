@@ -31,6 +31,7 @@
     </head>
     <body>
         <div class="row user_doc">
+            <h4>Add a new User Here</h4>
             <form class="col s12" name="add_user_form" id="add_user_form">
                 <div class="row">
                     <div class="input-field col s8">
@@ -58,7 +59,7 @@
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">date_range</i>
-                        <input id="dob" type="text" name="dob" class=" datepicker validate">
+                        <input id="dob" type="text" name="dob" class="datepicker validate">
                         <label for="dob" style="color: #000;">Date of Birth</label>
                     </div>  
                 </div>
@@ -109,13 +110,16 @@
             });
             $(document).ready(function () {
                 $('.datepicker').datepicker();
+
             });
+                
         </script>
 
 
         <script src = "../js/jquery.min.js"></script> 
         <script src="../js/home.js"></script>
         <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
+        <script src="../node_modules/materialize-css/js/datepicker.js" type="text/javascript"></script>
     </body>
 </html>
 

@@ -4,6 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once '../controllers/CrudOperation.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,11 +34,27 @@
                 width: 64%;
                 background-color: #008975;
             }
+
+            body {
+                height: auto;
+                overflow: auto;
+            }
         </style>
 
     </head>
     <body>
         <div class="row user_doc">
+            <h4>Register a new Card User Here</h4>
+            <h4 id="card_holder_form_error"></h4>
+            <h4>
+                <?php
+                if (isset($_SESSION['wrong_card_holder_email']) && $_SESSION['wrong_card_holder_email'] == 1) {
+                    echo 'The email address you provided is invalid!';
+                } else if (isset($_SESSION['card_holder_fields_empty']) && $_SESSION['card_holder_fields_empty'] == 1) {
+                    echo 'An error occured! All fields are required';
+                }
+                ?>
+            </h4>
             <form class="col s12" name="add_user_form" id="add_user_form">
                 <div class="row">
                     <div class="input-field col s8">
@@ -65,7 +82,7 @@
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">date_range</i>
-                        <input id="dob" type="text" name="dob" class=" datepicker validate">
+                        <input id="dob" type="text" name="dob" class="datepicker validate">
                         <label for="dob" style="color: #000;">Date of Birth</label>
                     </div>  
                 </div>
@@ -85,24 +102,74 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s8" style="margin-left: 40px; width: 600px;">
-                        <select class="browser-default" name="roleId" id="roleId">
-                            <option value="" disabled selected>Role</option>
-                            <option value="1">Administrator</option>
-                            <option value="4">CEO</option>
-                            <option value="2">Employee</option>
+                        <select class="browser-default" name="country" id="country">
                         </select>
                     </div>  
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">add_location</i>
+                        <input id="city" type="text" class="validate" name="city" list="city_list">
+                        <datalist id="city_list"></datalist>
+                        <label for="city" style="color: #000;">City</label>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">add_location</i>
                         <textarea id="address" name="address" class="materialize-textarea"></textarea>
-                        <label for="address" style="color: #000;">Address</label>
+                        <label for="address" style="color: #000;">Card Holder's Address</label>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">person_circled</i>
+                        <input id="name_of_kin" type="text" name="name_of_kin" class="validate">
+                        <label for="name_of_kin" style="color: #000;">Next of Kin</label>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">add_location</i>
+                        <textarea id="address_of_kin" name="address_of_kin" class="materialize-textarea"></textarea>
+                        <label for="address_of_kin" style="color: #000;">Address of Kin</label>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="kin_contact" type="text" name="kin_contact" class="validate">
+                        <label for="kin_contact" style="color: #000;">Contact number of Kin</label>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8" style="margin-left: 40px; width: 600px;">
+                        <?php
+                        $crud = new CrudOperation();
+                        $results = $crud->fetchSecretQuestions();
+                        ?>
+                        <select class="browser-default" name="secret_question" id="secret_question">
+                            <option value="" disabled selected>Secret Question</option>
+                            <?php
+                            foreach ($results as $result) {
+                                ?>
+                                <option value="<?php echo $result['id'] ?>"><?php echo $result['question'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">edit_mode</i>
+                        <input id="secret_answer" type="text" name="secret_answer" class="validate">
+                        <label for="secret_answer" style="color: #000;">Answer to Secret Question</label>
                     </div>  
                 </div>
                 <div class="row">
                     <div class="input-field l8" style="padding-left: 40px;">
-                        <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="save_employee" id="save_employee">Create User
+                        <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="create_card_holder_account_button" id="create_card_holder_account_button">Register
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -122,6 +189,8 @@
 
         <script src = "../js/jquery.min.js"></script> 
         <script src="../js/home.js"></script>
+        <script src="../js/countries.js" type="text/javascript"></script>
+        <script src="../js/cities.js" type="text/javascript"></script>
         <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
     </body>
 </html>

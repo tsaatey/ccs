@@ -10,15 +10,15 @@
     <li id="ceo_dashboard"><a href="#" class="selected" id="dashboard">Dashboard</a></li>
     <li id="ceo_transaction"><a class='dropdown-trigger' href='#' data-target='dropdown3' id="ceo_transaction_tab">Transactions</a></li>
     <li id="ceo_report"><a class='dropdown-trigger' href='#' data-target='dropdown2' id="ceo_report_tab">Report</a></li>
-    <li id="ceo_card_application"><a href="#" id="ceo_card_application_tab">Register Card Holder</a></li>
+    <li id="ceo_card_application"><a href="../pages/register_card_holder.php" target="content-area" id="ceo_card_application_tab">Register Card Holder</a></li>
     <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Basic Setup</a></li>
     <li id="ceo_account_settings"><a href="#" id="ceo_account_settings_tab">Account Settings</a></li>
 </ul>
 
 <!-- Dropdown Structure -->
 <ul id='dropdown1' class='dropdown-content' style="background-color: #008975; font-size: 10px;">
-    <li><a href="#!">Add CreditCard Company</a></li>
-    <li><a href="#!">Add Security Question</a></li>
+    <li id="ceo_add_card_company"><a id="ceo_add_card_company_tab" href="../pages/add_card_company.php" target="content-area">Add CreditCard Company</a></li>
+    <li id="ceo_add_questions"><a id="ceo_add_questions_tab" href="../pages/add_secret_question.php" target="content-area">Add Secret Question</a></li>
 </ul>
 <!-- Dropdown Structure -->
 <ul id='dropdown2' class='dropdown-content' style="background-color: #008975; font-size: 10px;">

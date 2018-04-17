@@ -1,18 +1,11 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-$dateOfBirth = filter_input(INPUT_POST, 'dob');
-$date = new DateTime($dateOfBirth);
-$formattedDate = $date->format('Y-m-d');
-
-echo $formattedDate;
-
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,36 +39,26 @@ echo $formattedDate;
     </head>
     <body>
         <div class="row user_doc">
-            <form class="col s12" name="add_user_form" id="add_user_form" action="dummy.php" method="post">
-                
+            <h4>Add Secret Question Here</h4>
+            <form class="col s12">
                 <div class="row">
-                    <div class="input-field col s8">
-                        <i class="material-icons prefix">date_range</i>
-                        <input id="dob" type="text" name="dob" class="datepicker validate">
-                        <label for="dob" style="color: #000;">Date of Birth</label>
-                    </div>  
-                </div>
-                <div class="row">
-                    <div class="input-field l8" style="padding-left: 40px;">
-                        <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="submit" name="test_button" id="test_button">Create User
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <i class="material-icons prefix">help</i>
+                            <input id="security_question" type="text" name="security_question" class="validate">
+                            <label for="security_question" style="color: #000;">Secret question</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field l8" style="padding-left: 40px;">
+                            <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="security_question_button" id="security_question_button">Save Question
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                $('select').formSelect();
-            });
-            $(document).ready(function () {
-                $('.datepicker').datepicker();
-
-            });
-                
-        </script>
-
 
         <script src = "../js/jquery.min.js"></script> 
         <script src="../js/home.js"></script>
@@ -83,5 +66,3 @@ echo $formattedDate;
         <script src="../node_modules/materialize-css/js/datepicker.js" type="text/javascript"></script>
     </body>
 </html>
-
-

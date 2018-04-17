@@ -37,10 +37,13 @@ if (!empty(filter_input(INPUT_POST, 'firstname')) && !empty(filter_input(INPUT_P
         $cardHolder = new CreditCardHolder();
         $secret = new Secret();
 
+        $date = new DateTime($cardHolderDob);
+        $formattedDate = $date->format('Y-m-d');
+
         $cardHolder->setId($creditCardHolderId);
         $cardHolder->setFirstname($firstname);
         $cardHolder->setLastname($lastname);
-        $cardHolder->setDateOfBirth($cardHolderDob);
+        $cardHolder->setDateOfBirth($formattedDate);
         $cardHolder->setGender($cardHolderGender);
         $cardHolder->setAddress($cardHolderAddress);
         $cardHolder->setEmail($email);
