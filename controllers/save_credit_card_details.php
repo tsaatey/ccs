@@ -38,10 +38,16 @@ if (!empty(filter_input(INPUT_POST, 'credit_card_number')) && !empty(filter_inpu
                     . 'Please use your email as username. The password is: ';
 
             $mail = new SendEmail($receiver_address, $password, $mailSubject, $messageBody);
+            
+            $iddate = new DateTime($issuedDate);
+            $formattedIssuerDate = $iddate->format('Y-m-d');
+            
+            $expDate = new DateTime($expiryDate);
+            $formattedExpiryDate = $expDate->format('Y-m-d');
 
             $creditCard->setNumber($cardNumber);
-            $creditCard->setIssueDate($issuedDate);
-            $creditCard->setExpiryDate($expiryDate);
+            $creditCard->setIssueDate($formattedIssuerDate);
+            $creditCard->setExpiryDate($formattedExpiryDate);
             $creditCard->setCvv($cvv);
             $creditCard->setIssuerId($company);
             $creditCard->setHolderId($_SESSION['card_holder_id']);
@@ -57,22 +63,18 @@ if (!empty(filter_input(INPUT_POST, 'credit_card_number')) && !empty(filter_inpu
                         $_SESSION['card_holder_username'] = '';
                         $_SESSION['card_holder_username'] = '';
                         $_SESSION['customer_account_created'] = 1;
-                        header("Location: ../views/home.php");
+                        header("Location: ../views/dashboard.php");
                     }
                 }
             } else {
-                $_SESSION['connection_error'] = 1;
-                header("Location: ../views/home.php");
+                echo 'connection_error';
             }
         } else {
-            $_SESSION['cvv_invalid'] = 1;
-            header("Location: ../views/home.php");
+            echo 'cvv_invalid';
         }
     } else {
-        $_SESSION['card_number_invalid'] = 1;
-        header("Location: ../views/home.php");
+        echo 'card_number_invalid';
     }
 } else {
-    $_SESSION['empty_card_fields'] = 1;
-    header("Location: ../views/home.php");
+    echo 'empty_card_fields';
 }

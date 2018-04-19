@@ -8,9 +8,9 @@
 
 require_once 'CrudOperation.php';
 
-if(!empty(filter_input(INPUT_POST, 'user_mail')) && !empty(filter_input(INPUT_POST, 'user_password'))) {
-    $username = filter_input(INPUT_POST, 'user_mail');
-    $password = filter_input(INPUT_POST, 'user_password');
+if(!empty(filter_input(INPUT_POST, 'username')) && !empty(filter_input(INPUT_POST, 'password'))) {
+    $username = filter_input(INPUT_POST, 'username');
+    $password = filter_input(INPUT_POST, 'password');
         
     $crud = new CrudOperation();
     $account = new Account();
@@ -21,10 +21,10 @@ if(!empty(filter_input(INPUT_POST, 'user_mail')) && !empty(filter_input(INPUT_PO
     
     if($crud->resetPassword($account)){
         $_SESSION['account_reset'] = 0;
-        header("Location: ../views/home.php");
+        header("Location: ../views/dashboard.php");
     }else {
-        header("Location: ../views/home.php?account_error=1");
+        echo 'account_error';
     }
 } else {
-    header("Location: ../views/home.php?empty_password=1");
+    echo 'empty_password';
 }

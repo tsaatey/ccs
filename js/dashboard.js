@@ -38,6 +38,11 @@
             $('#ceo_card_application_tab').removeClass('selected');
             $('#ceo_add_card_company_tab').removeClass('selected');
             $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
         });
     }
 
@@ -105,6 +110,11 @@
             $('#ceo_card_application_tab').addClass('selected');
             $('#ceo_add_card_company_tab').removeClass('selected');
             $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
         });
     }
     
@@ -124,6 +134,11 @@
             $('#ceo_card_application_tab').removeClass('selected');
             $('#ceo_add_card_company_tab').addClass('selected');
             $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
         });
     }
     
@@ -143,11 +158,135 @@
             $('#ceo_card_application_tab').removeClass('selected');
             $('#ceo_add_card_company_tab').removeClass('selected');
             $('#ceo_add_questions_tab').addClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
         });
     }
     
+    var specificTransactionLink = document.getElementById('specific_transaction_link');
+    if (specificTransactionLink) {
+        specificTransactionLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#ceo_card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').addClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+        });
+    }
     
+    var allTransactionsLink = document.getElementById('all_transactions_link');
+    if (allTransactionsLink) {
+        allTransactionsLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#ceo_card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').addClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+        });
+    }
     
+    var specificReportLink = document.getElementById('specific_report_link');
+    if (specificReportLink) {
+        specificReportLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#ceo_card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').addClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+        });
+    }
+    
+    var multipleReportLink = document.getElementById('multiple_report_link');
+    if (multipleReportLink) {
+        multipleReportLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#ceo_card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').addClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+        });
+    }
+
+    var registeredCardHoldersLink = document.getElementById('registerd_card_holders_link');
+    if (registeredCardHoldersLink) {
+        registeredCardHoldersLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#ceo_card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+        });
+    }
+    
+
 
 })();
 

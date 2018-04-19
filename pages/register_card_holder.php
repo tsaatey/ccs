@@ -15,8 +15,6 @@ require_once '../controllers/CrudOperation.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <script src = "../js/jquery.min.js"></script>
-        <script src="../node_modules/sweetalert2/dist/sweetalert2.all.js" type="text/javascript"></script>
-        <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
         <link href="../material-icons-0.2.1/iconfont/material-icons.css" rel="stylesheet" type="text/css"/>
         <link href="../node_modules/materialize-css/dist/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection"/>
         <link href="../css/dashboard.css" rel="stylesheet" type="text/css"/>
@@ -44,7 +42,7 @@ require_once '../controllers/CrudOperation.php';
     </head>
     <body>
         <div class="row user_doc">
-            <h4>Register a new Card User Here</h4>
+            <h4 style="color: #008975;">Register a new Card User Here</h4>
             <h4 id="card_holder_form_error"></h4>
             <h4>
                 <?php

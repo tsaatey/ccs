@@ -10,8 +10,6 @@
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -34,11 +32,15 @@
         </style>
     </head>
     <body>
-        <div class="row user_doc">
+        <div class = "row user_doc">
             <?php
             require_once '../controllers/CrudOperation.php';
             $crud = new CrudOperation();
-            $crud->displayEMployeeForDeletion();
+            if ($crud->getAllRegisteredCardHolders() != false) {
+                $crud->getAllRegisteredCardHolders();
+            } else {
+                echo '<h5>No data available for this query</h5>';
+            }
             ?>
         </div>
 

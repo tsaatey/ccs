@@ -7,7 +7,7 @@
 ?>
 
 <div class="row user_doc">
-    <p>Please Finish By Setting Up Your User Account</p>
+    <h6 style="color: #008975; font-weight: bold">Please Finish By Setting Up Your User Account</h6>
     <form class="col s12" id="account_form">
         <h5 id="form_error">
             <?php

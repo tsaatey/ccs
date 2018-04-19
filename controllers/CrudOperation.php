@@ -704,7 +704,7 @@ class CrudOperation {
                 'credit_card_number' => $transaction->getCreditCardNumber(),
                 'vendor_site' => $transaction->getVendorSite(),
                 'amount' => $transaction->getAmount(),
-                'transaction_date' =>$transaction->getTransactionDate(),
+                'transaction_date' => $transaction->getTransactionDate(),
                 'date_time' => $transaction->getDateTime()
             ]);
             return true;
@@ -899,7 +899,7 @@ class CrudOperation {
                     while ($result = $query->fetch()) {
                         ?>
                         <tr>
-                            <td><?php echo $counter; ?>
+                            <td><?php echo $counter; ?></td>
                             <td><?php echo $result['name']; ?></td>
                             <td><?php echo $result['country']; ?></td>
                             <td><?php echo $result['region']; ?></td>
@@ -917,6 +917,91 @@ class CrudOperation {
             return false;
         } catch (Exception $ex) {
             die($ex->getMessage());
+        }
+    }
+
+    public function fetchSpecificTransactions($startDate, $endDate) {
+        try {
+            $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                    . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                    . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                    . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                    . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
+                    . "transaction_details.id = transaction_location.transactionId AND transaction_details.transaction_date BETWEEN :start_date AND :end_date");
+            $query->execute([
+                'start__date' => $startDate,
+                'end_date' => $endDate
+            ]);
+
+            if ($query->rowCount() > 0) {
+                $tableOutput = '';
+                $tableOutput .= '<h5>Please select range for the transaction report</h5>';
+                $tableOutput .= '<table class = "table table-bordered table-responsive striped" id="user_table">'
+                        . '<tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>Region</th>
+                            <th>City</th>
+                            <th>Amount</th>
+                            <th>Date/Time</th>
+                          </tr>';
+                $counter = 1;
+                while ($result = $query->fetch()) {
+                    $tableOutput .= '<tr>
+                                        <td>'.$counter.'</td>
+                                        <td>'.$result['name'].'</td>
+                                        <td>'.$result['country'].'</td>
+                                        <td>'.$result['region'].'</td>
+                                        <td>'.$result['city'].'</td>
+                                        <td>'.$result['amount'].'</td>
+                                        <td>'.$result['date_time'].'</td>
+                                    </tr>';
+                    $counter =+ 1;
+                }
+                
+                echo $tableOutput;
+                
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            
+        }
+    }
+    
+    public function getAllRegisteredCardHolders() {
+        $query = $this->connection->prepare("SELECT CONCAT(firstname,' ',lastname) AS 'name', "
+                . "phone, email, city, address FROM credit_card_holder");
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            ?>
+            <table class = "table table bordered striped" id="user_table">
+                <tr>
+                    <th>Name of Card Holder</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                    <th>City</th>
+                    <th>Address</th>
+                </tr>
+                <?php
+                while ($result = $query->fetch()) {
+                    ?>
+                    <tr>
+                        <td><?php echo $result['name']; ?></td>
+                        <td><?php echo $result['phone']; ?></td>
+                        <td><?php echo $result['email']; ?></td>
+                        <td><?php echo $result['city']; ?></td>
+                        <td><?php echo $result['address']; ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+            <?php
+        } else {
+            return false;
         }
     }
 

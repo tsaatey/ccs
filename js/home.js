@@ -152,7 +152,7 @@
         element.style.fontWeight = 'normal';
         element.style.paddingLeft = '30px';
     };
-    
+
     /*
      * Function to validate passwords
      * Adopted from 'THE ART OF WEB'
@@ -162,7 +162,7 @@
         var regularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         return regularExpression.test(password);
     };
-    
+
     let validatePassword = () => {
         var pass = getAccountDetails();
         if (!checkPassword(pass.password)) {
@@ -170,7 +170,7 @@
         }
         return true;
     };
-    
+
     let validateAdminPassword = () => {
         var pass = getNewAdminPassword();
         if (!checkPassword(pass.admin_password)) {
@@ -178,7 +178,7 @@
         }
         return true;
     };
-    
+
     var account_button = document.getElementById('reset_password_button');
     if (account_button) {
         account_button.addEventListener('click', () => {
@@ -190,6 +190,30 @@
                         form.action = '../controllers/reset_password.php';
                         form.method = 'POST';
                         form.submit();
+                        $.ajax({
+                            url: '../controllers/reset_password.php',
+                            method: 'POST',
+                            data: {username: document.getElementById('user_mail').value, password: acc.password},
+                            complete: function (response) {
+                                if (response.responseText === 'account_error') {
+                                    swal({
+                                        title: 'Action failed',
+                                        text: 'Password could not be reset. Please try again!',
+                                        type: 'error'
+                                    });
+                                }
+
+                                if (response.responseText === 'empty_password') {
+                                    displayErrorMessage('form_error', 'Please supply values for all fields!');
+                                }
+                            }
+                        }).fail(
+                                swal({
+                                    title: 'Internal Error',
+                                    text: 'Process failed! An internal error has occured',
+                                    type: 'error'
+                                })
+                                );
                     } else {
                         displayErrorMessage('form_error', 'Password must contain at least 6 characters, including UPPER/lower case and numbers');
                     }
@@ -229,172 +253,6 @@
                 displayErrorMessage('some_error', 'Password fields must not be empty!');
             }
 
-        });
-    }
-
-    /*
-     * All the scripts below controls the CEO home page
-     */
-    var transaction = document.getElementById('ceo_transaction');
-    if (transaction) {
-        transaction.addEventListener('click', function () {
-            setHeader('Current Transactions');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'block');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#ceo_report_tab').removeClass('selected');
-            $('#ceo_card_application_tab').removeClass('selected');
-            $('#ceo_account_settings_tab').removeClass('selected');
-            $('#ceo_transaction_tab').addClass('selected');
-            $('#ceo_basic_setup_tab').removeClass('selected');
-        });
-    }
-
-    var report = document.getElementById('ceo_report');
-    if (report) {
-        report.addEventListener('click', function () {
-            setHeader('Transaction Report');
-            displayClickedMenu('ceo_report_area', 'block');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#ceo_report_tab').addClass('selected');
-            $('#ceo_card_application_tab').removeClass('selected');
-            $('#ceo_account_settings_tab').removeClass('selected');
-            $('#ceo_transaction_tab').removeClass('selected');
-            $('#ceo_basic_setup_tab').removeClass('selected');
-        });
-    }
-
-    var dashboard = document.getElementById('ceo_dashboard');
-    if (dashboard) {
-        dashboard.addEventListener('click', function () {
-            setHeader('Dashboard');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'block');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-            $("#dashboard").addClass('selected');
-            $('#ceo_report_tab').removeClass('selected');
-            $('#ceo_card_application_tab').removeClass('selected');
-            $('#ceo_account_settings_tab').removeClass('selected');
-            $('#ceo_transaction_tab').removeClass('selected');
-            $('#ceo_basic_setup_tab').removeClass('selected');
-        });
-    }
-
-    var cardApplication = document.getElementById('ceo_card_application');
-    if (cardApplication) {
-        cardApplication.addEventListener('click', function () {
-            setHeader('Card Application');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'block');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#ceo_report_tab').removeClass('selected');
-            $('#ceo_card_application_tab').addClass('selected');
-            $('#ceo_account_settings_tab').removeClass('selected');
-            $('#ceo_transaction_tab').removeClass('selected');
-            $('#ceo_basic_setup_tab').removeClass('selected');
-        });
-    }
-
-    var account_settings = document.getElementById('ceo_account_settings');
-    if (account_settings) {
-        account_settings.addEventListener('click', function () {
-            setHeader('Account Settings');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'block');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#ceo_report_tab').removeClass('selected');
-            $('#ceo_card_application_tab').removeClass('selected');
-            $('#ceo_account_settings_tab').addClass('selected');
-            $('#ceo_transaction_tab').removeClass('selected');
-            $('#ceo_basic_setup_tab').removeClass('selected');
-        });
-    }
-
-    /*
-     * All codes below controls the employee home page
-     */
-    var employee_report = document.getElementById('employee_report');
-    if (employee_report) {
-        employee_report.addEventListener('click', function () {
-            setHeader('Transaction Report');
-            displayClickedMenu('employee_report_area', 'block');
-            displayClickedMenu('employee_card_application_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('employee_transactions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#employee_report_tab').addClass('selected');
-            $('#employee_card_application_tab').removeClass('selected');
-            $('#employee_transaction_tab').removeClass('selected');
-        });
-    }
-
-    var dashboard = document.getElementById('employee_dashboard');
-    if (dashboard) {
-        dashboard.addEventListener('click', function () {
-            setHeader('Dashboard');
-            displayClickedMenu('employee_report_area', 'none');
-            displayClickedMenu('employee_card_application_area', 'none');
-            displayClickedMenu('dashboard_area', 'block');
-            displayClickedMenu('employee_transactions_area', 'none');
-            $("#dashboard").addClass('selected');
-            $('#employee_report_tab').removeClass('selected');
-            $('#employee_card_application_tab').removeClass('selected');
-            $('#employee_transaction_tab').removeClass('selected');
-        });
-    }
-
-    var cardApp = document.getElementById('employee_card_application');
-    if (cardApp) {
-        cardApp.addEventListener('click', function () {
-            setHeader('Card Holder Registration');
-            displayClickedMenu('employee_report_area', 'none');
-            displayClickedMenu('employee_card_application_area', 'block');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('employee_transactions_area', 'none');
-            $("#dashboard").removeClass('selected');
-            $('#employee_report_tab').removeClass('selected');
-            $('#employee_card_application_tab').addClass('selected');
-            $('#employee_transaction_tab').removeClass('selected');
-        });
-    }
-
-    var transaction = document.getElementById('employee_transaction');
-    if (transaction) {
-        transaction.addEventListener('click', function () {
-            setHeader('Current Transactions');
-            displayClickedMenu('employee_report_area', 'none');
-            displayClickedMenu('employee_card_application_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('employee_transactions_area', 'block');
-            $("#dashboard").removeClass('selected');
-            $('#employee_report_tab').removeClass('selected');
-            $('#employee_card_application_tab').removeClass('selected');
-            $('#employee_transaction_tab').addClass('selected');
         });
     }
 
@@ -442,9 +300,9 @@
                 // display error message
                 //displayErrorMessage('card_holder_form_error', 'Data cannot be submitted at this time. All fields are required!');
                 swal({
-                   title: 'Validation Error!',
-                   text: 'All fields are required',
-                   type: 'error'
+                    title: 'Validation Error!',
+                    text: 'All fields are required',
+                    type: 'error'
                 });
             }
         });
@@ -463,44 +321,42 @@
     if (creditCardButton) {
         creditCardButton.addEventListener('click', function () {
             var card_details = getCreditCardDetails();
-            if (card_details.card_number !== '' && card_details.cvv_number !== '') {
-                var creditCardForm = document.getElementById('credit_form');
-                creditCardForm.action = '../controllers/save_credit_card_details.php';
-                creditCardForm.method = 'POST';
-                creditCardForm.submit();
+            if (card_details.card_number !== '' && card_details.cvv_number !== '' && card_details.issuedDate !== '' && card_details.expiryDate !== '' && card_details.card_issuer !== '') {
+                $.ajax({
+                    url: '../controllers/save_credit_card_details.php',
+                    method: 'POST',
+                    data: {credit_card_number: card_details.card_number, cvv: card_details.cvv_number, issued_date: card_details.issuedDate, expiry_date: card_details.expiryDate, card_issuer: card_details.card_issuer},
+                    complete: function (response) {
+                        if (response.responseText === 'connection_error') {
+                            swal({
+                                title: 'Connection Error',
+                                text: 'Make sure there is internet connectivity and try again',
+                                type: 'info'
+                            });
+                        }
+
+                        if (response.responseText === 'cvv_invalid') {
+                            displayErrorMessage('credit_card_error', 'The CVV number you supplied is not a positive integer!');
+                        }
+
+                        if (response.responseText === 'card_number_invalid') {
+                            displayErrorMessage('credit_card_error', 'The credit card number you supplied is not a positive integer!');
+                        }
+
+                        if (response.responseText === 'empty_card_fields') {
+                            displayErrorMessage('credit_card_error', 'Data cannot be submitted at this time. All fields are required!');
+                        }
+                    }
+                }).fail(
+                        swal({
+                            title: 'Error!',
+                            text: 'An intenal error has occured',
+                            type: 'error'
+                        })
+                        );
             } else {
                 displayErrorMessage('credit_card_error', 'Data cannot be submitted at this time. All fields are required!');
             }
-        });
-    }
-
-    
-
-    var addCardCompany = document.getElementById('ceo_add_card_company');
-    if (addCardCompany) {
-        addCardCompany.addEventListener('click', function () {
-            setHeader('Basic Setup');
-            displayClickedMenu('ceo_card_company_area', 'block');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'none');
-        });
-    }
-
-    var securityQuestion = document.getElementById('ceo_add_questions');
-    if (securityQuestion) {
-        securityQuestion.addEventListener('click', function () {
-            setHeader('Basic Setup');
-            displayClickedMenu('ceo_card_company_area', 'none');
-            displayClickedMenu('ceo_report_area', 'none');
-            displayClickedMenu('ceo_card_application_area', 'none');
-            displayClickedMenu('ceo_account_settings_area', 'none');
-            displayClickedMenu('dashboard_area', 'none');
-            displayClickedMenu('ceo_transactions_area', 'none');
-            displayClickedMenu('ceo_questions_area', 'block');
         });
     }
 
@@ -645,7 +501,66 @@
         });
     }
 
-
+    var getSpecifiTransactionButton = document.getElementById('specific_transaction_button');
+    if (getSpecifiTransactionButton) {
+        getSpecifiTransactionButton.addEventListener('click', function () {
+            if (document.getElementById('start_date').value !== '' && document.getElementById('end_date').value !== '') {
+                start_date = document.getElementById('start_date').value;
+                end_date = document.getElementById('end_date').value;
+                $.ajax({
+                    url: '../controllers/fetch_specific_transaction.php',
+                    method: 'POST',
+                    data: {start_date: start_date, end_date: end_date},
+                    complete: function (response) {
+                        $('#specific_transaction_area').html(response.responseText);
+                    }
+                });
+            } else {
+                displayErrorMessage('specific_transaction_error', 'Please provide start date and end date!');
+            }
+        });
+    }
+    
+    let getSpecificReportQueryData = () => {
+        return {
+           card: getFormData('card'),
+           startDate: getFormData('start_date'),
+           endDate: getFormData('end_date')
+        };
+    };
+    
+    var specificCustomerTransactionReportButton = document.getElementById('specific_customer_report_button');
+    if (specificCustomerTransactionReportButton) {
+        specificCustomerTransactionReportButton.addEventListener('click', () => {
+            var data = getSpecificReportQueryData();
+            if (data.card !== '' && data.endDate !== '' && data.startDate !== '') {
+                var form = document.getElementById('specific_report_form');
+                form.action = '../controllers/get_specific_customer_report.php';
+                form.method = 'POST';
+                form.submit();
+            } else {
+                displayErrorMessage('specific_transaction_error', 'Please all fields are required!');
+            }
+        });
+    }
+    
+    var multipleCustomerReportButton = document.getElementById('multiple_customer_report_button');
+    if (multipleCustomerReportButton) {
+        multipleCustomerReportButton.addEventListener('click', function () {
+            var start_date = document.getElementById('start_date').value;
+            var end_date = document.getElementById('end_date').value;
+            if (start_date !== '' && end_date !== '') {
+                var form = document.getElementById('multiple_report_form');
+                form.action = '../controllers/multiple_report_request.php';
+                form.method = 'POST',
+                form.submit();
+            } else {
+                displayErrorMessage('specific_transaction_error', 'Please all fields are required!');
+            }
+        });
+    }
+    
+    
 
 })();
 

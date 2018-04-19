@@ -4,6 +4,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +38,7 @@
     </head>
     <body>
         <div class="row user_doc">
-            <h4 style="color: #008975; font-weight: bold">Please set a new password</h4>
+            <h6 style="color: #008975; font-weight: bold">We have detected that your password was recently reset to default. Please change it to make sure your account is secured</h6>
             <form class="col s12" id="new_admin_password_form">
                 <h5 id="form_error">
                     <?php
@@ -50,21 +52,28 @@
                 <h5 id="some_error"></h5>
                 <div class="row">
                     <div class="input-field col s8">
-                        <i class="material-icons prefix">person_pin_circled</i>
-                        <input id="new_admin_password" type="password" name="new_admin_password" class="validate">
-                        <label for="new_admin_password" style="color: #000;">New password</label>
+                        <i class="material-icons prefix">person_circled</i>
+                        <input id="user_mail" type="email" name="user_mail" value="<?php echo $_SESSION['username']; ?>" readonly="true" class="validate">
+                        <label for="user_mail" style="color: #000;">Username</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">person_pin_circled</i>
-                        <input id="new_admin_password_confirmed" type="password" name="new_admin_password_confirmed" class="validate">
-                        <label for="new_admin_password_confirmed" style="color: #000;">Confirm new password</label>
+                        <input id="user_password" type="password" name="user_password" class="validate">
+                        <label for="user_password" style="color: #000;">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">person_pin_circled</i>
+                        <input id="user_password_confirmed" type="password" name="user_password_confirmed" class="validate">
+                        <label for="user_password_confirmed" style="color: #000;">Confirm password</label>
                     </div>  
                 </div>
                 <div class="row">
                     <div class="input-field l8" style="padding-left: 40px;">
-                        <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="admin_reset_password_button" id="admin_reset_password_button">Change Password
+                        <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="reset_password_button" id="reset_password_button">Change Password
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -77,3 +86,5 @@
         <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
     </body>
 </html>
+
+

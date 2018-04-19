@@ -35,7 +35,7 @@ require_once '../controllers/CrudOperation.php';
             function resizeIframe(obj) {
                 obj.style.height = obj.contentWindow.document.body.scrollHeight + 100 + 'px';
             }
-            $('iframe').height( $('iframe').contents().outerHeight() );
+            $('iframe').height($('iframe').contents().outerHeight());
         </script>
         <style>
             body {
@@ -85,7 +85,9 @@ require_once '../controllers/CrudOperation.php';
                                 }
 
                                 if ($_SESSION['roleId'] == 4) {
-                                    require_once '../menus/ceo_menu.php';
+                                    if (empty($_SESSION['card_holder_account_in_progress'])) {
+                                        require_once '../menus/ceo_menu.php';
+                                    }
                                 }
                             }
                         }
@@ -121,11 +123,18 @@ require_once '../controllers/CrudOperation.php';
                                         }
 
                                         if ($_SESSION['roleId'] == 4) {
-                                            $crud = new CrudOperation();
-                                            if ($crud->displayTransactionsForToday() == false) {
-                                                echo 'No transaction has been recorded yet';
+                                            if (isset($_SESSION['card_holder_account_in_progress']) && $_SESSION['card_holder_account_in_progress'] == 1) {
+                                                require_once '../pages/credit_card_account.php';
                                             } else {
-                                                $crud->displayTransactionsForToday();
+                                                if (!empty($_SESSION['account_reset']) && $_SESSION['account_reset'] == 1) {
+                                                    require_once '../pages/set_new_password.php';
+                                                }
+                                                $crud = new CrudOperation();
+                                                if ($crud->displayTransactionsForToday() == false) {
+                                                    echo 'No transaction has been recorded yet';
+                                                } else {
+                                                    $crud->displayTransactionsForToday();
+                                                }
                                             }
                                         }
                                     }
@@ -154,6 +163,24 @@ require_once '../controllers/CrudOperation.php';
                 <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
             </ul>
         </div>
+        <?php
+        if (isset($_SESSION['customer_account_created']) && $_SESSION['customer_account_created'] == 1) {
+            ?>
+            <script type="text/javascript">
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    width: '36rem',
+                    title: 'Card Holder Registration Successful!',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            </script>
+            <?php
+            $_SESSION['customer_account_created'] = 0;
+        } 
+        
+        ?>
 
         <script>
             $(document).ready(function () {

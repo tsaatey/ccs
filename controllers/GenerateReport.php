@@ -77,18 +77,36 @@ class GenerateReport {
         }
     }
 
-    public function getSpecificTransactionReport($startDate, $endDate) {
+    public function getSpecificTransactionReport($startDate, $endDate, $card_number = '') {
         try {
-            $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
-                    . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
-                    . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
-                    . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
-                    . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
-                    . "transaction_details.id = transaction_location.transactionId AND transaction_details.transaction_date BETWEEN :start_date AND :end_date");
-            $query->execute([
-                'start__date' => $startDate,
-                'end_date' => $endDate
-            ]);
+            $query = '';
+            if ($card_number != '') {
+                $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                        . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                        . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                        . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                        . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
+                        . "transaction_details.id = transaction_location.transactionId AND "
+                        . "transaction_details.credit_card_number = :card_number AND transaction_details.transaction_date BETWEEN :start_date AND :end_date");
+                $query->execute([
+                    'card_number' => $card_number,
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
+                ]);
+            } else {
+                $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                        . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                        . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                        . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                        . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
+                        . "transaction_details.id = transaction_location.transactionId AND "
+                        . "transaction_details.transaction_date BETWEEN :start_date AND :end_date");
+                $query->execute([
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
+                ]);
+            }
+
             if ($query->rowCount() > 0) {
                 $this->pdf->AddPage($this->report_size);
                 $this->pdf->SetFont("Arial", "", 14);
@@ -115,10 +133,10 @@ class GenerateReport {
                 }
                 $this->pdf->Output();
             } else {
-                echo 'No records to display currently';
+                echo '<h3>No transaction available for this query</h3>';
             }
         } catch (Exception $ex) {
-            
+            die($ex->getTraceAsString());
         }
     }
 

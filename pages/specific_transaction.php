@@ -5,7 +5,6 @@
  * and open the template in the editor.
  */
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,47 +31,48 @@
                 width: 64%;
                 background-color: #008975;
             }
-
-            .file_button{
-                background-color: #008975;
-            }
         </style>
 
     </head>
     <body>
         <div class="row user_doc">
-            <h4 style="color: #008975;">Add Credit Card Company Information Here</h4>
+            <h4 style="color: #008975;">Please select range for the transaction report</h4>
+            <h6 id="specific_transaction_error"></h6>
             <form class="col s12">
                 <div class="row">
                     <div class="row">
                         <div class="input-field col s8">
-                            <i class="material-icons prefix">credit_card</i>
-                            <input id="card_company" type="text" name="card_company" class="validate">
-                            <label for="card_company" style="color: #000;">Credit Card Company</label>
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="start_date" type="text" name="start_date" class="datepicker validate">
+                            <label for="start_date" style="color: #000;">Start date</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field file-field col s8">
-                            <div class="btn file_button">
-                                <span>File</span>
-                                <input type="file" name = "image" id="image">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" id="image1" type="text" placeholder="Upload credit card company's logo here...">
-                            </div>
-                        </div>  
+                        <div class="input-field col s8">
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="end_date" type="text" name="end_date" class="datepicker validate">
+                            <label for="end_date" style="color: #000;">End date</label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field l8" style="padding-left: 40px;">
-                            <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="card_company_button" id="card_company_button">Upload Info
+                            <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="specific_transaction_button" id="specific_transaction_button">Get Transactions
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
                     </div>
                 </div>
             </form>
+            <div class="row" id="specific_transaction_area"></div>
         </div>
+        
+        <script>
+            $(document).ready(function () {
+                $('.datepicker').datepicker();
 
+            });
+        </script>
+        
         <script src = "../js/jquery.min.js"></script> 
         <script src="../js/home.js"></script>
         <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
