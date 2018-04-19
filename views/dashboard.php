@@ -63,148 +63,177 @@ require_once '../controllers/CrudOperation.php';
 
             </div>
         </nav>
-        <!-- Side bar navigator -->
-        <div class="row">
-            <div class="col l2">
-                <ul id="slide-out" class="sidenav sidenav-fixed">
-                    <div class="sidebar sticky">
-                        <?php
-                        if (!empty($_SESSION['roleId'])) {
-                            if (empty($_SESSION['user_mail'])) {
-                                if ($_SESSION['roleId'] == 1) {
+        <?php
+        if (!empty($_SESSION['roleId'])) {
+            ?>
+            <!-- Side bar navigator -->
+            <div class="row">
+                <div class="col l2">
+                    <ul id="slide-out" class="sidenav sidenav-fixed">
+                        <div class="sidebar sticky">
+                            <?php
+                            if (!empty($_SESSION['roleId'])) {
+                                if (empty($_SESSION['user_mail'])) {
+                                    if ($_SESSION['roleId'] == 1) {
 
-                                    require_once '../menus/admin_menu.php';
-                                }
+                                        require_once '../menus/admin_menu.php';
+                                    }
 
-                                if ($_SESSION['roleId'] == 2) {
-                                    // import employee menu here
-                                }
+                                    if ($_SESSION['roleId'] == 2) {
+                                        if (empty($_SESSION['card_holder_account_in_progress'])) {
+                                            require_once '../menus/employee_menu.php';
+                                        }
+                                    }
 
-                                if ($_SESSION['roleId'] == 3) {
-                                    // import customer menu here
-                                }
+                                    if ($_SESSION['roleId'] == 3) {
+                                        require_once '../menus/customer_menu.php';
+                                    }
 
-                                if ($_SESSION['roleId'] == 4) {
-                                    if (empty($_SESSION['card_holder_account_in_progress'])) {
-                                        require_once '../menus/ceo_menu.php';
+                                    if ($_SESSION['roleId'] == 4) {
+                                        if (empty($_SESSION['card_holder_account_in_progress'])) {
+                                            require_once '../menus/ceo_menu.php';
+                                        }
                                     }
                                 }
                             }
-                        }
-                        ?>
-                    </div>
-                </ul>
-            </div>
-            <div class="col l8">
-                <div class="row">
+                            ?>
+                        </div>
+                    </ul>
+                </div>
+                <div class="col l8">
                     <div class="row">
-                        <div class="col l1">
+                        <div class="row">
+                            <div class="col l1">
+                            </div>
+                            <div class="col l10" id="cont">
+                                <div id="iframe-top"></div>
+                                <iframe name="content-area" id="content-area" frameborder="0" onload="resizeIframe(this)"></iframe>
+                            </div>
+                            <div class="col l1">
+                            </div>
                         </div>
-                        <div class="col l10" id="cont">
-                            <div id="iframe-top"></div>
-                            <iframe name="content-area" id="content-area" frameborder="0" onload="resizeIframe(this)"></iframe>
-                        </div>
-                        <div class="col l1">
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col l1"></div>
-                        <div class="col l10">
-                            <div class="col l12 m5">
-                                <div class="card-panel" id="user_display">
-                                    <?php
-                                    if (!empty($_SESSION['user_mail'])) {
-                                        require_once '../pages/account_setup.php';
-                                    } else {
-                                        if ($_SESSION['roleId'] == 1) {
-                                            $crud = new CrudOperation();
-                                            $crud->retriveUserInfo();
-                                        }
-
-                                        if ($_SESSION['roleId'] == 4) {
-                                            if (isset($_SESSION['card_holder_account_in_progress']) && $_SESSION['card_holder_account_in_progress'] == 1) {
-                                                require_once '../pages/credit_card_account.php';
-                                            } else {
-                                                if (!empty($_SESSION['account_reset']) && $_SESSION['account_reset'] == 1) {
-                                                    require_once '../pages/set_new_password.php';
-                                                }
+                        <div class="row">
+                            <div class="col l1"></div>
+                            <div class="col l10">
+                                <div class="col l12 m5">
+                                    <div class="card-panel" id="user_display">
+                                        <?php
+                                        if (!empty($_SESSION['user_mail'])) {
+                                            require_once '../pages/account_setup.php';
+                                        } else {
+                                            if ($_SESSION['roleId'] == 1) {
                                                 $crud = new CrudOperation();
-                                                if ($crud->displayTransactionsForToday() == false) {
-                                                    echo 'No transaction has been recorded yet';
+                                                $crud->retriveUserInfo();
+                                            }
+
+                                            if ($_SESSION['roleId'] == 4) {
+                                                if (isset($_SESSION['card_holder_account_in_progress']) && $_SESSION['card_holder_account_in_progress'] == 1) {
+                                                    require_once '../pages/credit_card_account.php';
                                                 } else {
-                                                    $crud->displayTransactionsForToday();
+                                                    if (!empty($_SESSION['account_reset']) && $_SESSION['account_reset'] == 1) {
+                                                        require_once '../pages/set_new_password.php';
+                                                    }
+                                                    $crud = new CrudOperation();
+                                                    if ($crud->displayTransactionsForToday() == false) {
+                                                        echo 'No transaction has been recorded yet';
+                                                    } else {
+                                                        $crud->displayTransactionsForToday();
+                                                    }
+                                                }
+                                            }
+
+                                            if ($_SESSION['roleId'] == 2) {
+                                                if (isset($_SESSION['card_holder_account_in_progress']) && $_SESSION['card_holder_account_in_progress'] == 1) {
+                                                    require_once '../pages/credit_card_account.php';
+                                                } else {
+                                                    if (!empty($_SESSION['account_reset']) && $_SESSION['account_reset'] == 1) {
+                                                        require_once '../pages/set_new_password.php';
+                                                    }
+                                                    $crud = new CrudOperation();
+                                                    if ($crud->displayTransactionsForToday() == false) {
+                                                        echo 'No transaction has been recorded yet';
+                                                    } else {
+                                                        $crud->displayTransactionsForToday();
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    ?>
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col l1"></div>
+
                         </div>
-                        <div class="col l1"></div>
 
                     </div>
-
+                </div>
+                <div class="col l2">
                 </div>
             </div>
-            <div class="col l2">
+            <!-- Floating action button -->
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
+                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
+                    <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                    <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
+                </ul>
             </div>
-        </div>
-        <!-- Floating action button -->
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large">
-                <i class="large material-icons">mode_edit</i>
-            </a>
-            <ul>
-                <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
-            </ul>
-        </div>
-        <?php
-        if (isset($_SESSION['customer_account_created']) && $_SESSION['customer_account_created'] == 1) {
-            ?>
-            <script type="text/javascript">
-                swal({
-                    position: 'top-end',
-                    type: 'success',
-                    width: '36rem',
-                    title: 'Card Holder Registration Successful!',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-            </script>
             <?php
-            $_SESSION['customer_account_created'] = 0;
-        } 
-        
-        ?>
+            if (isset($_SESSION['customer_account_created']) && $_SESSION['customer_account_created'] == 1) {
+                ?>
+                <script type="text/javascript">
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        width: '36rem',
+                        title: 'Card Holder Registration Successful!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
+                <?php
+                $_SESSION['customer_account_created'] = 0;
+            }
+            ?>
+            <?php
+        } else {
+            ?>
+        <marquee behavior = "alternate"><h1> Dashboard is disabled. Please login </h1></marquee>
+        <p><a href="../index.php">Click here login</a></p>
+        <?php
+    }
+    ?>
 
-        <script>
-            $(document).ready(function () {
-                $('.sidenav').sidenav();
-            });
 
-            $(document).ready(function () {
-                $('.fixed-action-btn').floatingActionButton();
-            });
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
 
-            $(document).ready(function () {
-                $('.collapsible').collapsible();
-            });
-            $(document).ready(function () {
-                $('.dropdown-trigger').dropdown();
-            });
+        $(document).ready(function () {
+            $('.fixed-action-btn').floatingActionButton();
+        });
 
-        </script>
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+        $(document).ready(function () {
+            $('.dropdown-trigger').dropdown();
+        });
 
-        <script src = "../js/jquery.min.js"></script>  
-        <script src="../js/dashboard.js" type="text/javascript"></script>
-        <script defer src="../js/fontawesome-all.js"></script>
-        <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
+    </script>
 
-    </body>
+    <script src = "../js/jquery.min.js"></script>  
+    <script src="../js/dashboard.js" type="text/javascript"></script>
+    <script defer src="../js/fontawesome-all.js"></script>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
+
+</body>
 </html>
 

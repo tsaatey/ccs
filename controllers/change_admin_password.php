@@ -14,15 +14,15 @@ if(!empty(filter_input(INPUT_POST, 'new_admin_password'))) {
     $crud = new CrudOperation();
     $account = new Account();
     
-    $account->setUsername('admin@ccs.gh');
+    $account->setUsername($_SESSION['username']);
     $account->setPassword(sha1($password));
     
     
     if($crud->resetPassword($account)){
-        header("Location: ../views/home.php");
+        header("Location: ../views/dashboard.php");
     }else {
-        header("Location: ../views/home.php?account_error=1");
+        header("Location: ../views/dashboard.php?account_error=1");
     }
 } else {
-    header("Location: ../views/home.php?empty_password=1");
+    header("Location: ../views/dashboard.php?empty_password=1");
 }

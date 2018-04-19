@@ -560,6 +560,34 @@
         });
     }
     
+    var unlockCardHolderAccount = document.getElementById('retrieve_card_holder_account_button');
+    if (unlockCardHolderAccount) {
+        unlockCardHolderAccount.addEventListener('click', function () {
+            var username = document.getElementById('card_holder_username').value;
+            if (username !== '') {
+                $.ajax({
+                    url: '../controllers/unlock_account.php',
+                    method: 'POST',
+                    data: {username: username},
+                    complete: function (response) {
+                        if (response.responseText === 'invalid_username') {
+                            displayErrorMessage('some_error', 'Username provided does not exist in the system!');
+                        }
+                        
+                        if (response.responseText === 'internal_error') {
+                            swal({
+                               title: 'Internal Error!',
+                               text: 'An internal error has occured. Please try again',
+                               type: 'error'
+                            });
+                        }
+                    }
+                });
+            } else {
+                displayErrorMessage('some_error', 'Please provide a username!');
+            }
+        });
+    }
     
 
 })();
