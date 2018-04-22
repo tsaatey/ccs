@@ -17,7 +17,7 @@ if (!empty(filter_input(INPUT_POST, 'username'))) {
         if (!$crud->resetSecurityCheckHistory($id)) {
             echo 'internal_error';
         } else {
-            header("Location: ../views/dashboard.php");
+            echo 'unlock_sccuess';
         }
     } else {
         echo 'invalid_username';

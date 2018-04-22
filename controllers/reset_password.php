@@ -21,7 +21,7 @@ if(!empty(filter_input(INPUT_POST, 'username')) && !empty(filter_input(INPUT_POS
     
     if($crud->resetPassword($account)){
         $_SESSION['account_reset'] = 0;
-        header("Location: ../views/dashboard.php");
+        echo 'password_reset_success';
     }else {
         echo 'account_error';
     }

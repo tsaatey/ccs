@@ -37,6 +37,13 @@ require_once '../controllers/CrudOperation.php';
     </head>
     <body>
         <div class="row user_doc">
+            <h5>This account is being setup for <span style="font-weight: bold"><?php
+                    if (isset($_SESSION['card_holder_name']) && $_SESSION['card_holder_name']) {
+                        echo $_SESSION['card_holder_name'];
+                    } else {
+                        echo 'No one yet';
+                    }
+                    ?></span></h5>
             <h4 style="color: #008975;">Complete the registration by supplying the credit card details</h4>
             <h5 id="credit_card_error"></h5>
             <form class="col s12" name="add_user_form" id="add_user_form">

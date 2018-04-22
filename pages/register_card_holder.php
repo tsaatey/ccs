@@ -53,7 +53,7 @@ require_once '../controllers/CrudOperation.php';
                 }
                 ?>
             </h4>
-            <form class="col s12" name="add_user_form" id="add_user_form">
+            <form class="col s12" name="add_user_form" id="card_holder_form">
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">person</i>

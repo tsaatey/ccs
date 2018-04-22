@@ -8,9 +8,9 @@
 
 require_once 'CrudOperation.php';
 
-if(!empty(filter_input(INPUT_POST, 'user_mail')) && !empty(filter_input(INPUT_POST, 'user_password'))) {
-    $username = filter_input(INPUT_POST, 'user_mail');
-    $password = filter_input(INPUT_POST, 'user_password');
+if(!empty(filter_input(INPUT_POST, 'username')) && !empty(filter_input(INPUT_POST, 'password'))) {
+    $username = filter_input(INPUT_POST, 'username');
+    $password = filter_input(INPUT_POST, 'password');
     $roleId = $_SESSION['user_role'];
     
     $crud = new CrudOperation();
@@ -23,10 +23,10 @@ if(!empty(filter_input(INPUT_POST, 'user_mail')) && !empty(filter_input(INPUT_PO
     if($crud->createAccount($account)){
         $_SESSION['user_mail'] = ''; 
         $_SESSION['setup_account'] = 0;
-        header("Location: ../views/dashboard.php");
+        echo 'account_created';
     }else {
-        header("Location: ../views/dashboard.php?account_error=1");
+        echo 'account_error';
     }
 } else {
-    header("Location: ../views/dashboard.php?empty_password=1");
+    echo 'empty_password';
 }

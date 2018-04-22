@@ -40,9 +40,10 @@ if (!empty(filter_input(INPUT_POST, 'firstname')) && !empty(filter_input(INPUT_P
             $_SESSION['user_mail'] = $email;
             $_SESSION['user_role'] = $roleId;
             $_SESSION['setup_account'] = 1;
-            //echo 'employee_saved';
-            header("Location: ../views/dashboard.php");
-            exit();
+            echo 'employee_saved';
+            //header("Location: ../views/dashboard.php");
+            //exit();
+            
         } else {
             echo 'something_went_wrong';
         }

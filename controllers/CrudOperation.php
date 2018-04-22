@@ -1004,5 +1004,159 @@ class CrudOperation {
             return false;
         }
     }
+    
+    public function displayCustomerTransactionsForToday($username) {
+        try {
+            $id = $this->getBuyerId($username);
+            $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                    . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                    . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                    . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                    . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND transaction_details.credit_card_holder_id = :id AND "
+                    . "transaction_details.id = transaction_location.transactionId AND transaction_details.date_time LIKE CONCAT('',:date_time, '%')");
+            $query->execute([
+                'id' => $id,
+                'date_time' => date('Y-m-d')
+            ]);
+
+            if ($query->rowCount() > 0) {
+                ?>
+                <table class = "table table-bordered table-responsive striped" id="user_table">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Region</th>
+                        <th>City</th>
+                        <th>Amount</th>
+                        <th>Date/Time</th>
+                    </tr>
+                    <?php
+                    $counter = 1;
+                    while ($result = $query->fetch()) {
+                        ?>
+                        <tr>
+                            <td><?php echo $counter; ?>
+                            <td><?php echo $result['name']; ?></td>
+                            <td><?php echo $result['country']; ?></td>
+                            <td><?php echo $result['region']; ?></td>
+                            <td><?php echo $result['city']; ?></td>
+                            <td><?php echo $result['amount']; ?></td>
+                            <td><?php echo $result['date_time']; ?></td>
+                        </tr>
+                        <?php
+                        $counter += 1;
+                    }
+                    ?>
+                </table>
+                <?php
+            }
+            return false;
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
+    }
+    
+    public function displayAllCustomerTransactions($username) {
+        try {
+            $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                    . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                    . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                    . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                    . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
+                    . "transaction_details.id = transaction_location.transactionId AND transaction_details.credit_card_holder_id = :id");
+            $query->execute([
+                'id' => $this->getBuyerId($username)
+            ]);
+
+            if ($query->rowCount() > 0) {
+                ?>
+                <table class = "table table-bordered table-responsive striped" id="user_table">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Region</th>
+                        <th>City</th>
+                        <th>Amount</th>
+                        <th>Date/Time</th>
+                    </tr>
+                    <?php
+                    $counter = 1;
+                    while ($result = $query->fetch()) {
+                        ?>
+                        <tr>
+                            <td><?php echo $counter; ?></td>
+                            <td><?php echo $result['name']; ?></td>
+                            <td><?php echo $result['country']; ?></td>
+                            <td><?php echo $result['region']; ?></td>
+                            <td><?php echo $result['city']; ?></td>
+                            <td><?php echo $result['amount']; ?></td>
+                            <td><?php echo $result['date_time']; ?></td>
+                        </tr>
+                        <?php
+                        $counter += 1;
+                    }
+                    ?>
+                </table>
+                <?php
+            }
+            return false;
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
+    }
+    
+    public function timeBoundTransactions($username, $startDate, $endDate) {
+        try {
+            $query = $this->connection->prepare("SELECT CONCAT(credit_card_holder.firstname,' ',credit_card_holder.lastname) AS 'name', "
+                    . "transaction_location.country AS 'country', transaction_location.region AS 'region', "
+                    . "transaction_location.city AS 'city', transaction_details.amount AS 'amount', "
+                    . "transaction_details.date_time AS 'date_time' FROM transaction_location, transaction_details, credit_card_holder "
+                    . "WHERE credit_card_holder.id = transaction_details.credit_card_holder_id AND "
+                    . "transaction_details.id = transaction_location.transactionId AND transaction_details.credit_card_holder_id = :id AND"
+                    . "transaction_details.transaction_date BETWEEN :start_date AND :end_date");
+            $query->execute([
+                'id' => $this->getBuyerId($username),
+                'start__date' => $startDate,
+                'end_date' => $endDate
+            ]);
+
+            if ($query->rowCount() > 0) {
+                $tableOutput = '';
+                $tableOutput .= '<h5>Please select range for the transaction report</h5>';
+                $tableOutput .= '<table class = "table table-bordered table-responsive striped" id="user_table">'
+                        . '<tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>Region</th>
+                            <th>City</th>
+                            <th>Amount</th>
+                            <th>Date/Time</th>
+                          </tr>';
+                $counter = 1;
+                while ($result = $query->fetch()) {
+                    $tableOutput .= '<tr>
+                                        <td>'.$counter.'</td>
+                                        <td>'.$result['name'].'</td>
+                                        <td>'.$result['country'].'</td>
+                                        <td>'.$result['region'].'</td>
+                                        <td>'.$result['city'].'</td>
+                                        <td>'.$result['amount'].'</td>
+                                        <td>'.$result['date_time'].'</td>
+                                    </tr>';
+                    $counter =+ 1;
+                }
+                
+                echo $tableOutput;
+                
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            
+        }
+    }
 
 }

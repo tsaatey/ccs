@@ -6,23 +6,10 @@
 
 (() => {
     /*
-     * All the scriots below controls the admin work area
+     * 
      * @param {type} text
      * @returns {undefined}
      */
-// method to display menu header
-    let setHeader = (text) => {
-        var h1 = document.getElementById('header_display');
-        h1.innerHTML = text;
-    };
-    let displayClickedMenu = (id, displayMode) => {
-        var element = document.getElementById(id);
-        element.style.display = displayMode;
-    };
-    let displayInstructions = (id, text) => {
-        var element = document.getElementById(id);
-        element.innerHTML = text;
-    };
     let getFormData = (id) => {
         return document.getElementById(id).value;
     };
@@ -43,18 +30,6 @@
         saveEmployeeButton.addEventListener('click', () => {
             var employee = getEmployeeDataObject();
             if (employee.firstname !== '' && employee.lastname !== '' && employee.dateOfBirth !== '' && employee.phone !== '' && employee.email !== '' && employee.address !== '') {
-//                var form = document.getElementById('add_user_form');
-//                form.action = '../controllers/save_employee_data.php';
-//                form.method = 'POST';
-//                form.submit();
-
-                swal({
-                    title: "Uploading information...",
-                    text: "Please wait",
-                    imageUrl: "../images/ajax_loader_blue_64.gif",
-                    showConfirmButton: false,
-                    allowOutsideClick: false
-                });
                 $.ajax({
                     url: '../controllers/save_employee_data.php',
                     method: 'POST',
@@ -68,8 +43,9 @@
 
                             });
                             setTimeout(function () {
-                                location.reload(true);
-                            }, 3000);
+                                window.top.location.reload(true);
+                            }, 2000);
+
                         }
 
                         if (response.responseText === 'something_went_wrong') {
@@ -113,6 +89,7 @@
 
     let getAccountDetails = () => {
         return{
+            username: getFormData('user_mail'),
             password: getFormData('user_password'),
             confirmedPassword: getFormData('user_password_confirmed')
         };
@@ -124,10 +101,35 @@
             if (acc.password !== '' && acc.confirmedPassword !== '') {
                 if (acc.password === acc.confirmedPassword) {
                     if (validatePassword() === true) {
-                        var form = document.getElementById('account_form');
-                        form.action = '../controllers/create_account.php';
-                        form.method = 'POST';
-                        form.submit();
+                        $.ajax({
+                            url: '../controllers/create_account.php',
+                            method: 'POST',
+                            data: {username: acc.username, password: acc.password},
+                            complete: function (response) {
+                                if (response.responseText === 'account_created') {
+                                    swal({
+                                        title: 'Success',
+                                        text: 'Account has been created successfully',
+                                        type: 'success'
+                                    });
+                                    setTimeout(function () {
+                                        window.top.location.reload(true);
+                                    }, 2000);
+                                }
+
+                                if (response.responseText === 'account_error') {
+                                    swal({
+                                        title: 'Error!',
+                                        text: 'Account could not be created. Please try again',
+                                        type: 'error'
+                                    });
+                                }
+
+                                if (response.responseText === 'empty_password') {
+                                    displayErrorMessage('create_account_error', 'Password fields must not be empty!');
+                                }
+                            }
+                        });
                     } else {
                         displayErrorMessage('create_account_error', 'Password must contain at least 6 characters, including UPPER/lower case and numbers');
                     }
@@ -186,15 +188,21 @@
             if (acc.password !== '' && acc.confirmedPassword !== '') {
                 if (acc.password === acc.confirmedPassword) {
                     if (validatePassword() === true) {
-                        var form = document.getElementById('reset_password_form');
-                        form.action = '../controllers/reset_password.php';
-                        form.method = 'POST';
-                        form.submit();
                         $.ajax({
                             url: '../controllers/reset_password.php',
                             method: 'POST',
                             data: {username: document.getElementById('user_mail').value, password: acc.password},
                             complete: function (response) {
+                                if (response.responseText === 'password_reset_success') {
+                                    swal({
+                                        title: 'Success',
+                                        text: 'Password reset successful!',
+                                        type: 'success'
+                                    });
+                                    setTimeout(function () {
+                                        window.top.location.reload(true);
+                                    }, 3000);
+                                }
                                 if (response.responseText === 'account_error') {
                                     swal({
                                         title: 'Action failed',
@@ -207,13 +215,7 @@
                                     displayErrorMessage('form_error', 'Please supply values for all fields!');
                                 }
                             }
-                        }).fail(
-                                swal({
-                                    title: 'Internal Error',
-                                    text: 'Process failed! An internal error has occured',
-                                    type: 'error'
-                                })
-                                );
+                        });
                     } else {
                         displayErrorMessage('form_error', 'Password must contain at least 6 characters, including UPPER/lower case and numbers');
                     }
@@ -239,10 +241,35 @@
             if (acc.admin_password !== '' && acc.confirmed_admin_password !== '') {
                 if (acc.admin_password === acc.confirmed_admin_password) {
                     if (validateAdminPassword() === true) {
-                        var form = document.getElementById('new_admin_password_form');
-                        form.action = '../controllers/change_admin_password.php';
-                        form.method = 'POST';
-                        form.submit();
+                        $.ajax({
+                            url: '../controllers/change_admin_password.php',
+                            method: 'POST',
+                            data: {password: acc.admin_password},
+                            complete: function (response) {
+                                if (response.responseText === 'password_changed') {
+                                    swal({
+                                        title: 'Success',
+                                        text: 'Password has been changed successfully!',
+                                        type: 'success'
+                                    });
+                                    setTimeout(function () {
+                                        window.top.location.reload(true);
+                                    }, 3000);
+                                }
+
+                                if (response.responseText === 'account_error') {
+                                    swal({
+                                        title: 'Action failed',
+                                        text: 'Password could not be changed. Please try again!',
+                                        type: 'error'
+                                    });
+                                }
+
+                                if (response.responseText === 'empty_password') {
+                                    displayErrorMessage('some_error', 'Password fields must not be empty!');
+                                }
+                            }
+                        });
                     } else {
                         displayErrorMessage('some_error', 'Password must contain at least 6 characters, including UPPER/lower case and numbers');
                     }
@@ -292,10 +319,48 @@
                     && holder_details.kinContact !== ''
                     && holder_details.secretAnswer !== '') {
                 // get form id and submit data
-                var cardHolderForm = document.getElementById('card_holder_form');
-                cardHolderForm.action = '../controllers/save_card_holder_data.php';
-                cardHolderForm.method = 'POST';
-                cardHolderForm.submit();
+
+                $.ajax({
+                    url: '../controllers/save_card_holder_data.php',
+                    method: 'POST',
+                    data: {
+                        firstname: holder_details.firstname,
+                        lastname: holder_details.lastname,
+                        gender: holder_details.gender,
+                        dob: holder_details.dob,
+                        phone: holder_details.phone,
+                        email: holder_details.email,
+                        address: holder_details.address,
+                        country: holder_details.country,
+                        city: holder_details.city,
+                        name_of_kin: holder_details.nameOfKin,
+                        address_of_kin: holder_details.addressOfKin,
+                        kin_contact: holder_details.kinContact,
+                        secret_question: holder_details.secretQuestion,
+                        secret_answer: holder_details.secretAnswer
+                    },
+                    complete: function (response) {
+                        if (response.responseText === 'card_holder_registered') {
+                            window.top.location.reload(true);
+                        }
+
+                        if (response.responseText === 'wrong_card_holder_email') {
+                            swal({
+                                title: 'Validation Error!',
+                                text: 'The email provided is not valid',
+                                type: 'error'
+                            });
+                        }
+
+                        if (response.responseText === 'card_holder_fields_empty') {
+                            swal({
+                                title: 'Validation Error!',
+                                text: 'All fields are required',
+                                type: 'error'
+                            });
+                        }
+                    }
+                });
             } else {
                 // display error message
                 //displayErrorMessage('card_holder_form_error', 'Data cannot be submitted at this time. All fields are required!');
@@ -322,6 +387,13 @@
         creditCardButton.addEventListener('click', function () {
             var card_details = getCreditCardDetails();
             if (card_details.card_number !== '' && card_details.cvv_number !== '' && card_details.issuedDate !== '' && card_details.expiryDate !== '' && card_details.card_issuer !== '') {
+                swal({
+                    title: "Saving credit card details...",
+                    text: "Please wait",
+                    imageUrl: "../images/ajax_loader_blue_64.gif",
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
                 $.ajax({
                     url: '../controllers/save_credit_card_details.php',
                     method: 'POST',
@@ -333,6 +405,18 @@
                                 text: 'Make sure there is internet connectivity and try again',
                                 type: 'info'
                             });
+                        }
+
+                        if (response.responseText === 'card_details_saved') {
+                            swal({
+                                title: 'Success',
+                                text: 'Account registration fully completed!',
+                                type: 'success'
+                            });
+
+                            setTimeout(function () {
+                                window.top.location.reload(true);
+                            }, 2000);
                         }
 
                         if (response.responseText === 'cvv_invalid') {
@@ -347,13 +431,7 @@
                             displayErrorMessage('credit_card_error', 'Data cannot be submitted at this time. All fields are required!');
                         }
                     }
-                }).fail(
-                        swal({
-                            title: 'Error!',
-                            text: 'An intenal error has occured',
-                            type: 'error'
-                        })
-                        );
+                });
             } else {
                 displayErrorMessage('credit_card_error', 'Data cannot be submitted at this time. All fields are required!');
             }
@@ -520,15 +598,15 @@
             }
         });
     }
-    
+
     let getSpecificReportQueryData = () => {
         return {
-           card: getFormData('card'),
-           startDate: getFormData('start_date'),
-           endDate: getFormData('end_date')
+            card: getFormData('card'),
+            startDate: getFormData('start_date'),
+            endDate: getFormData('end_date')
         };
     };
-    
+
     var specificCustomerTransactionReportButton = document.getElementById('specific_customer_report_button');
     if (specificCustomerTransactionReportButton) {
         specificCustomerTransactionReportButton.addEventListener('click', () => {
@@ -543,7 +621,7 @@
             }
         });
     }
-    
+
     var multipleCustomerReportButton = document.getElementById('multiple_customer_report_button');
     if (multipleCustomerReportButton) {
         multipleCustomerReportButton.addEventListener('click', function () {
@@ -553,13 +631,13 @@
                 var form = document.getElementById('multiple_report_form');
                 form.action = '../controllers/multiple_report_request.php';
                 form.method = 'POST',
-                form.submit();
+                        form.submit();
             } else {
                 displayErrorMessage('specific_transaction_error', 'Please all fields are required!');
             }
         });
     }
-    
+
     var unlockCardHolderAccount = document.getElementById('retrieve_card_holder_account_button');
     if (unlockCardHolderAccount) {
         unlockCardHolderAccount.addEventListener('click', function () {
@@ -570,15 +648,26 @@
                     method: 'POST',
                     data: {username: username},
                     complete: function (response) {
+                        if (response.responseText === 'unlock_sccuess') {
+                            swal({
+                                title: 'Success!',
+                                text: 'Account has been successfully unlocked!',
+                                type: 'success'
+                            });
+
+                            setTimeout(function () {
+                                window.top.location.reload(true);
+                            }, 2000);
+                        }
                         if (response.responseText === 'invalid_username') {
                             displayErrorMessage('some_error', 'Username provided does not exist in the system!');
                         }
-                        
+
                         if (response.responseText === 'internal_error') {
                             swal({
-                               title: 'Internal Error!',
-                               text: 'An internal error has occured. Please try again',
-                               type: 'error'
+                                title: 'Internal Error!',
+                                text: 'An internal error has occured. Please try again',
+                                type: 'error'
                             });
                         }
                     }
@@ -588,7 +677,7 @@
             }
         });
     }
-    
+
 
 })();
 

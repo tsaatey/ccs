@@ -63,7 +63,7 @@ if (!empty(filter_input(INPUT_POST, 'credit_card_number')) && !empty(filter_inpu
                         $_SESSION['card_holder_username'] = '';
                         $_SESSION['card_holder_username'] = '';
                         $_SESSION['customer_account_created'] = 1;
-                        header("Location: ../views/dashboard.php");
+                        echo 'card_details_saved';
                     }
                 }
             } else {

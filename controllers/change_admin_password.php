@@ -8,8 +8,8 @@
 
 require_once 'CrudOperation.php';
 
-if(!empty(filter_input(INPUT_POST, 'new_admin_password'))) {
-    $password = filter_input(INPUT_POST, 'new_admin_password');
+if(!empty(filter_input(INPUT_POST, 'password'))) {
+    $password = filter_input(INPUT_POST, 'password');
         
     $crud = new CrudOperation();
     $account = new Account();
@@ -19,10 +19,10 @@ if(!empty(filter_input(INPUT_POST, 'new_admin_password'))) {
     
     
     if($crud->resetPassword($account)){
-        header("Location: ../views/dashboard.php");
+        echo 'password_changed';
     }else {
-        header("Location: ../views/dashboard.php?account_error=1");
+        echo 'account_error';
     }
 } else {
-    header("Location: ../views/dashboard.php?empty_password=1");
+    echo 'empty_password';
 }

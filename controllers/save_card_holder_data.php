@@ -69,18 +69,17 @@ if (!empty(filter_input(INPUT_POST, 'firstname')) && !empty(filter_input(INPUT_P
                 $_SESSION['wrong_card_holder_email'] = 0;
                 $_SESSION['card_holder_fields_empty'] = 0;
 
-                header("Location: ../views/home.php");
+                //header("Location: ../views/dashboard.php");
+                echo 'card_holder_registered';
             }
         } else {
             
         }
     } else {
         // email is wrong, redirect to home and report error
-        $_SESSION['wrong_card_holder_email'] = 1;
-        header("Location: ../views/home.php");
+        echo 'wrong_card_holder_email';
     }
 } else {
-    $_SESSION['card_holder_fields_empty'] = 1;
-    header("Location: ../views/home.php");
+    echo 'card_holder_fields_empty';
 }
 

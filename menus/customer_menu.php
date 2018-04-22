@@ -19,7 +19,7 @@
 </ul>
 
 <ul id='dropdown3' class='dropdown-content' style="background-color: #008975; font-size: 10px;">
-    <li id = "all_transactions_link"><a id="all_transactions_link_tab" href="../pages/all_transactions.php" target="content-area">All Shopping History</a></li>
+    <li id = "all_transactions_link"><a id="all_transactions_link_tab" href="../pages/all_customer_transactions.php" target="content-area">All Shopping History</a></li>
     <li id="specific_transaction_link"><a id="specific_transaction_link_tab" href="../pages/specific_transaction.php" target="content-area">Time Bound Shopping History</a></li>
 </ul>
 

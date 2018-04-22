@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 require_once '../controllers/CrudOperation.php';
+//session_destroy();
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,13 @@ require_once '../controllers/CrudOperation.php';
                             </div>
                             <div class="col l10" id="cont">
                                 <div id="iframe-top"></div>
-                                <iframe name="content-area" id="content-area" frameborder="0" onload="resizeIframe(this)"></iframe>
+                                <?php
+                                if (empty($_SESSION['card_holder_account_in_progress']) || empty($_SESSION['user_mail'])) {
+                                    ?>
+                                    <iframe name="content-area" id="content-area" frameborder="0" onload="resizeIframe(this)"></iframe>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <div class="col l1">
                             </div>
@@ -158,15 +165,22 @@ require_once '../controllers/CrudOperation.php';
                                                     }
                                                 }
                                             }
+
+                                            if ($_SESSION['roleId'] == 3) {
+                                                $crud = new CrudOperation();
+                                                if ($crud->displayCustomerTransactionsForToday($_SESSION['username']) == false) {
+                                                    echo 'You have not conducted any transaction for today!';
+                                                } else {
+                                                    $crud->displayCustomerTransactionsForToday($_SESSION['username']);
+                                                }
+                                            }
                                         }
                                         ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="col l1"></div>
-
                         </div>
-
                     </div>
                 </div>
                 <div class="col l2">
@@ -178,29 +192,18 @@ require_once '../controllers/CrudOperation.php';
                     <i class="large material-icons">mode_edit</i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
-                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
-                    <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                    <?php
+                    if ($_SESSION['roleId'] != 3) {
+                        ?>
+                        <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
+                        <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
+                        <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                        <?php
+                    }
+                    ?>
                     <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
                 </ul>
             </div>
-            <?php
-            if (isset($_SESSION['customer_account_created']) && $_SESSION['customer_account_created'] == 1) {
-                ?>
-                <script type="text/javascript">
-                    swal({
-                        position: 'top-end',
-                        type: 'success',
-                        width: '36rem',
-                        title: 'Card Holder Registration Successful!',
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                </script>
-                <?php
-                $_SESSION['customer_account_created'] = 0;
-            }
-            ?>
             <?php
         } else {
             ?>
@@ -223,10 +226,10 @@ require_once '../controllers/CrudOperation.php';
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
+
         $(document).ready(function () {
             $('.dropdown-trigger').dropdown();
         });
-
     </script>
 
     <script src = "../js/jquery.min.js"></script>  
