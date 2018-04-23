@@ -585,14 +585,10 @@
             if (document.getElementById('start_date').value !== '' && document.getElementById('end_date').value !== '') {
                 start_date = document.getElementById('start_date').value;
                 end_date = document.getElementById('end_date').value;
-                $.ajax({
-                    url: '../controllers/fetch_specific_transaction.php',
-                    method: 'POST',
-                    data: {start_date: start_date, end_date: end_date},
-                    complete: function (response) {
-                        $('#specific_transaction_area').html(response.responseText);
-                    }
-                });
+                var form = document.getElementById('specific__');
+                form.action = '../controllers/fetch_specific_transaction.php';
+                form.method = 'POST';
+                form.submit();
             } else {
                 displayErrorMessage('specific_transaction_error', 'Please provide start date and end date!');
             }
@@ -678,6 +674,7 @@
         });
     }
 
+    
 
 })();
 

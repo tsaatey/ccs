@@ -17,13 +17,45 @@ if (!empty(filter_input(INPUT_POST, 'start_date')) && !empty(filter_input(INPUT_
     $date1 = new DateTime($endDate);
     $formattedendDate = $date1->format('Y-m-d');
     
-    $crud = new CrudOperation();
-    
-    $result = $crud->fetchSpecificTransactions($formattedStartDate, $formattedendDate);
-    if ($result != false) {
-        echo $result;
-    } else {
-        echo '<h5 style = "color: red;">No Transactions Available!</h5>';
-    }
-    
 }
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src = "../js/jquery.min.js"></script>
+        <link href="../node_modules/materialize-css/dist/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection"/>
+        <link href="../css/dashboard.css" rel="stylesheet" type="text/css"/>
+
+        <style>
+            .user_doc{
+                width: 960px;
+                margin: 0 auto;
+            }
+
+            .index_buttons{
+                width: 64%;
+                background-color: #008975;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="row user_doc">
+            <div class="row">
+                <?php
+                $crud = new CrudOperation();
+                $crud->fetchSpecificTransactions($formattedStartDate, $formattedendDate);
+                ?>
+            </div>
+        </div>
+
+
+        <script src = "../js/jquery.min.js"></script> 
+        <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
+
+    </body>
+</html>

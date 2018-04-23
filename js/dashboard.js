@@ -45,6 +45,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
 
@@ -93,6 +94,7 @@
             $('#user_display').css('display', 'none');
             $('#reset_account').removeClass('selected');
             $('#change_admin_pass').addClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -171,6 +173,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -197,6 +200,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -223,6 +227,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -249,6 +254,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -275,6 +281,7 @@
             $('#registerd_card_holders_link_tab').addClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
 
@@ -327,6 +334,7 @@
             $('#registerd_card_holders_link_tab').removeClass('selected');
             $('#my_account_link_tab').addClass('selected');
             $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
         });
     }
     
@@ -353,6 +361,33 @@
             $('#registerd_card_holders_link_tab').removeClass('selected');
             $('#my_account_link_tab').removeClass('selected');
             $('#retrieve_card_holder_account_link_tab').addClass('selected');
+        });
+    }
+    
+    var customerReportLink = document.getElementById('customer_report_link');
+    if (customerReportLink) {
+        customerReportLink.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').addClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').removeClass('selected');
+            $('#my_account_link_tab').removeClass('selected');
+            $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').addClass('selected');
         });
     }
 

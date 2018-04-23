@@ -36,11 +36,7 @@
             <?php
             require_once '../controllers/CrudOperation.php';
             $crud = new CrudOperation();
-            if ($crud->getAllRegisteredCardHolders() != false) {
-                $crud->getAllRegisteredCardHolders();
-            } else {
-                echo '<h5>No data available for this query</h5>';
-            }
+            $crud->getAllRegisteredCardHolders();
             ?>
         </div>
 

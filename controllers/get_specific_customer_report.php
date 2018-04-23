@@ -19,7 +19,7 @@ if (!empty(filter_input(INPUT_POST, 'card')) && !empty(filter_input(INPUT_POST, 
     $date2 = new DateTime($endDate);
     $formattedendDate = $date2->format('Y-m-d');
     
-    $report = new GenerateReport('P');
+    $report = new GenerateReport('L');
     $report->getSpecificTransactionReport($formattedStartDate, $formattedendDate, $card_number);
     
 }

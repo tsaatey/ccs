@@ -25,6 +25,10 @@ div#header{
     margin: 0 auto;
 }
 
+.nav-wrapper{
+    background-color: #008975;
+}
+
 a{
     text-decoration: none;
 }
@@ -61,6 +65,12 @@ a{
     float: right;
     margin-top: 12px;
     margin-right: 15px;
+}
+
+#customer_login a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
 }
 
 #customer_login table td{
@@ -107,7 +117,7 @@ div.box{
     margin-top: 15px;
 }
 
-div.box .box-top{
+.box-top{
     color: #fff;
     text-shadow: 0px 1px 1px solid #000;
     background-color: #008975;
@@ -125,16 +135,15 @@ div.box .box-panel{
 
 #billing_area{
     border: 1px solid black;
-    width: 40%;
-    height: 70%;
+    width: 46%;
+    height: 80%;
     border-radius: 10px;
     display: inline-block;
     vertical-align: top;
 }
 
 .form_top{
-    width: 100%;
-    height: 10%;
+    height: 60px;
     border-bottom: 1px solid #000;
     margin-bottom: 7px;
 }
@@ -142,8 +151,6 @@ div.box .box-panel{
 #notification_area{
     display: inline-block;
     border: 1px solid #000;
-    width: 40%;
-    height: 70%;
     vertical-align: top;
     border-radius: 10px;
     float: right;
@@ -171,9 +178,7 @@ div.box .box-panel{
 
 #notification_div{
     display: inline-block;
-    width: 40%;
     vertical-align: top;
-    float: right;
     margin-top: 15%;
 }
 

@@ -9,13 +9,12 @@
 require_once '../utilities/ClientLocation.php';
 require_once './CrudOperation.php';
 
-if (!empty(filter_input(INPUT_POST, 'fullname')) &&
+if (
         !empty(filter_input(INPUT_POST, 'cardnumber')) &&
         !empty(filter_input(INPUT_POST, 'securitycode')) &&
         !empty(filter_input(INPUT_POST, 'expirydate')) &&
         !empty(filter_input(INPUT_POST, 'amount'))) {
 
-    $fullname = filter_input(INPUT_POST, 'fullname');
     $card_number = filter_input(INPUT_POST, 'cardnumber');
     $securitycode = filter_input(INPUT_POST, 'securitycode');
     $expirydate = filter_input(INPUT_POST, 'expirydate');
@@ -23,8 +22,10 @@ if (!empty(filter_input(INPUT_POST, 'fullname')) &&
     $ip = '154.160.6.59';
     $ip1 = '41.215.171.217';
     $ip2 = '154.160.22.225';
-
-    $_SESSION['fullname'] = $fullname;
+    
+    $date = new DateTime($expirydate);
+    $expirydate = $date->format('Y-m-d');
+    
     $_SESSION['card_number'] = $card_number;
     $_SESSION['securitycode'] = $securitycode;
     $_SESSION['expirydate'] = $expirydate;

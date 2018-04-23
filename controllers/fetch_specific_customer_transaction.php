@@ -19,11 +19,7 @@ if (!empty(filter_input(INPUT_POST, 'start_date')) && !empty(filter_input(INPUT_
     
     $crud = new CrudOperation();
     
-    $result = $crud->fetchSpecificTransactions($_SESSION['username'], $formattedStartDate, $formattedendDate);
-    if ($result != false) {
-        echo $result;
-    } else {
-        echo '<h5 style = "color: red;">No Transactions Available!</h5>';
-    }
+    $result = $crud->fetchSpecificTransactions($formattedStartDate, $formattedendDate);
+    echo $result;
     
 }

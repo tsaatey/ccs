@@ -142,11 +142,7 @@ require_once '../controllers/CrudOperation.php';
                                                         require_once '../pages/set_new_password.php';
                                                     }
                                                     $crud = new CrudOperation();
-                                                    if ($crud->displayTransactionsForToday() == false) {
-                                                        echo 'No transaction has been recorded yet';
-                                                    } else {
-                                                        $crud->displayTransactionsForToday();
-                                                    }
+                                                    $crud->displayTransactionsForToday();
                                                 }
                                             }
 
@@ -158,21 +154,13 @@ require_once '../controllers/CrudOperation.php';
                                                         require_once '../pages/set_new_password.php';
                                                     }
                                                     $crud = new CrudOperation();
-                                                    if ($crud->displayTransactionsForToday() == false) {
-                                                        echo 'No transaction has been recorded yet';
-                                                    } else {
-                                                        $crud->displayTransactionsForToday();
-                                                    }
+                                                    $crud->displayTransactionsForToday();
                                                 }
                                             }
 
                                             if ($_SESSION['roleId'] == 3) {
                                                 $crud = new CrudOperation();
-                                                if ($crud->displayCustomerTransactionsForToday($_SESSION['username']) == false) {
-                                                    echo 'You have not conducted any transaction for today!';
-                                                } else {
-                                                    $crud->displayCustomerTransactionsForToday($_SESSION['username']);
-                                                }
+                                                $crud->displayCustomerTransactionsForToday($_SESSION['username']);
                                             }
                                         }
                                         ?>
@@ -187,23 +175,23 @@ require_once '../controllers/CrudOperation.php';
                 </div>
             </div>
             <!-- Floating action button -->
-            <div class="fixed-action-btn">
+<!--            <div class="fixed-action-btn">
                 <a class="btn-floating btn-large">
                     <i class="large material-icons">mode_edit</i>
                 </a>
                 <ul>
                     <?php
-                    if ($_SESSION['roleId'] != 3) {
+                    //if ($_SESSION['roleId'] != 3) {
                         ?>
                         <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
                         <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
                         <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
                         <?php
-                    }
+                   // }
                     ?>
                     <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
                 </ul>
-            </div>
+            </div>-->
             <?php
         } else {
             ?>

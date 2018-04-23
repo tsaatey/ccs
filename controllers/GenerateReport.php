@@ -47,26 +47,26 @@ class GenerateReport {
             if ($query->rowCount() > 0) {
                 $this->pdf->AddPage($this->report_size);
                 $this->pdf->SetFont("Arial", "", 14);
-                date_default_timezone_set("GMT");
+                date_default_timezone_set("Europe/London");
                 $this->pdf->SetFont("Arial", "", 12);
-                $this->pdf->Cell(195, 10, "CreditCard Shield", 0, 1, "C");
+                $this->pdf->Cell(275, 10, "CreditCard Shield", 0, 1, "C");
                 $this->pdf->Cell(0, 10, "Transaction Report", 0, 1, "C");
                 $this->pdf->Cell(0, 10, "" . date("d/m/Y") . '  ' . date("h:i:sa"), 0, 1, "R");
                 $this->pdf->Cell(0, 5, "", 0, 1);
                 $this->pdf->Cell(55, 8, "Name", 1, 0, "C");
                 $this->pdf->Cell(55, 8, "Country", 1, 0, "C");
-                $this->pdf->Cell(55, 8, "Region", 1, 0, "C");
-                $this->pdf->Cell(55, 8, "City", 1, 0, "C");
+                $this->pdf->Cell(45, 8, "Region", 1, 0, "C");
+                $this->pdf->Cell(45, 8, "City", 1, 0, "C");
                 $this->pdf->Cell(28, 8, "Amount", 1, 0, "C");
-                $this->pdf->Cell(28, 8, "Date/Time", 1, 1, "C");
+                $this->pdf->Cell(55, 8, "Date/Time", 1, 1, "C");
 
                 while ($result = $query->fetch()) {
                     $this->pdf->Cell(55, 8, $result['name'], 1, 0, "C");
                     $this->pdf->Cell(55, 8, $result['country'], 1, 0, "C");
-                    $this->pdf->Cell(55, 8, $result['region'], 1, 0, "C");
-                    $this->pdf->Cell(55, 8, $result['city'], 1, 0, "C");
+                    $this->pdf->Cell(45, 8, $result['region'], 1, 0, "C");
+                    $this->pdf->Cell(45, 8, $result['city'], 1, 0, "C");
                     $this->pdf->Cell(28, 8, $result['amount'], 1, 0, "C");
-                    $this->pdf->Cell(28, 8, $result['date_time'], 1, 1, "C");
+                    $this->pdf->Cell(55, 8, $result['date_time'], 1, 1, "C");
                 }
                 $this->pdf->Output();
             } else {
@@ -110,26 +110,26 @@ class GenerateReport {
             if ($query->rowCount() > 0) {
                 $this->pdf->AddPage($this->report_size);
                 $this->pdf->SetFont("Arial", "", 14);
-                date_default_timezone_set("GMT");
+                date_default_timezone_set("Europe/London");
                 $this->pdf->SetFont("Arial", "", 12);
-                $this->pdf->Cell(195, 10, "CreditCard Shield", 0, 1, "C");
+                $this->pdf->Cell(275, 10, "CreditCard Shield", 0, 1, "C");
                 $this->pdf->Cell(0, 10, "Transaction Report", 0, 1, "C");
                 $this->pdf->Cell(0, 10, "" . date("d/m/Y") . '  ' . date("h:i:sa"), 0, 1, "R");
                 $this->pdf->Cell(0, 5, "", 0, 1);
                 $this->pdf->Cell(55, 8, "Name", 1, 0, "C");
                 $this->pdf->Cell(55, 8, "Country", 1, 0, "C");
-                $this->pdf->Cell(55, 8, "Region", 1, 0, "C");
-                $this->pdf->Cell(55, 8, "City", 1, 0, "C");
+                $this->pdf->Cell(45, 8, "Region", 1, 0, "C");
+                $this->pdf->Cell(45, 8, "City", 1, 0, "C");
                 $this->pdf->Cell(28, 8, "Amount", 1, 0, "C");
-                $this->pdf->Cell(28, 8, "Date/Time", 1, 1, "C");
+                $this->pdf->Cell(55, 8, "Date/Time", 1, 1, "C");
 
                 while ($result = $query->fetch()) {
                     $this->pdf->Cell(55, 8, $result['name'], 1, 0, "C");
                     $this->pdf->Cell(55, 8, $result['country'], 1, 0, "C");
-                    $this->pdf->Cell(55, 8, $result['region'], 1, 0, "C");
-                    $this->pdf->Cell(55, 8, $result['city'], 1, 0, "C");
+                    $this->pdf->Cell(45, 8, $result['region'], 1, 0, "C");
+                    $this->pdf->Cell(45, 8, $result['city'], 1, 0, "C");
                     $this->pdf->Cell(28, 8, $result['amount'], 1, 0, "C");
-                    $this->pdf->Cell(28, 8, $result['date_time'], 1, 1, "C");
+                    $this->pdf->Cell(55, 8, $result['date_time'], 1, 1, "C");
                 }
                 $this->pdf->Output();
             } else {

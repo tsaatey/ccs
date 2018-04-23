@@ -38,7 +38,7 @@
         <div class="row user_doc">
             <h4 style="color: #008975;">Please select range for the transaction report</h4>
             <h6 id="specific_transaction_error"></h6>
-            <form class="col s12" id="specific__">
+            <form class="col s12" id="specific_timebound_transaction">
                 <div class="row">
                     <div class="row">
                         <div class="input-field col s8">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field l8" style="padding-left: 40px;">
-                            <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="specific_transaction_button" id="specific_transaction_button">Get Transactions
+                            <button class="btn index_buttons z-depth-3 btn-large waves-effect waves-light" type="button" name="timebound_transaction_button" id="timebound_transaction_button">Get Your Transactions
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -73,6 +73,7 @@
         </script>
         
         <script src = "../js/jquery.min.js"></script> 
+        <script src="../js/customer_timebound.js" type="text/javascript"></script>
         <script src="../js/home.js"></script>
         <script src="../node_modules/materialize-css/dist/js/materialize.min.js" type="text/javascript"></script>
         <script src="../node_modules/materialize-css/js/datepicker.js" type="text/javascript"></script>

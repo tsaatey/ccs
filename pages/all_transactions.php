@@ -38,11 +38,7 @@ require_once '../controllers/CrudOperation.php';
             <div class="row">
                 <?php 
                     $crud = new CrudOperation();
-                    if ($crud->displayAllTransactions() != false) {
-                        $crud->displayAllTransactions();
-                    } else {
-                        echo '<h4>No transactions available!</h4>';
-                    }
+                    $crud->displayAllTransactions();
                 ?>
             </div>
         </div>

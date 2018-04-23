@@ -18,7 +18,6 @@
      */
     let getBillingDataObject = () => {
         return{
-            fullname: getFormData('fullname'),
             cardnumber: getFormData('cardnumber'),
             securitycode: getFormData('cvvnumber'),
             expirydate: getFormData('expiry_date'),
@@ -34,7 +33,7 @@
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
             var data = getBillingDataObject();
-            if (data.fullname !== '' && data.cardnumber !== '' && data.securitycode !== '' && data.expirydate !== '' && data.amount !== '') {
+            if (data.cardnumber !== '' && data.securitycode !== '' && data.expirydate !== '' && data.amount !== '') {
                 swal({
                     title: "Processing transaction...",
                     text: "Please wait",
@@ -45,7 +44,7 @@
                 $.ajax({
                     url: '../controllers/process_transaction.php',
                     method: "POST",
-                    data: {fullname: data.fullname, cardnumber: data.cardnumber, securitycode: data.securitycode, expirydate: data.expirydate, amount: data.amount},
+                    data: {cardnumber: data.cardnumber, securitycode: data.securitycode, expirydate: data.expirydate, amount: data.amount},
                     dataType: 'json',
                     complete: function (response) {
                         console.log(response);
@@ -329,7 +328,7 @@
             } else {
                 swal(
                         "Validation failed",
-                        "Username and password required!",
+                        "All fields are required!",
                         "error"
                         );
             }
@@ -346,7 +345,13 @@
             $('#notification_area').css('display', 'none');
         });
     }
-
+    
+    var resetButton = document.getElementById('button_cancel');
+    if (resetButton) {
+        resetButton.addEventListener('click', function () {
+            window.location.reload(true);
+        });
+    }
 
 
 
