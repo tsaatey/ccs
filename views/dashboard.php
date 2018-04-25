@@ -175,23 +175,36 @@ require_once '../controllers/CrudOperation.php';
                 </div>
             </div>
             <!-- Floating action button -->
-<!--            <div class="fixed-action-btn">
+            <div class="fixed-action-btn">
                 <a class="btn-floating btn-large">
                     <i class="large material-icons">mode_edit</i>
                 </a>
                 <ul>
                     <?php
-                    //if ($_SESSION['roleId'] != 3) {
+                    if ($_SESSION['roleId'] == 1) {
                         ?>
-                        <li><a class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
-                        <li><a class="btn-floating yellow darken-1"><i class="material-icons">delete</i></a></li>
-                        <li><a class="btn-floating green"><i class="material-icons">restore</i></a></li>
+                        <li id="floating_admin_add_user"><a id="floating_admin_new_user" class="btn-floating red" href="../pages/add_user.php" target="content-area"><i class="material-icons">add</i></a></li>
+                        <li id="floating_delete_user"><a id="floating_user_delete" class="btn-floating yellow darken-1" href="../pages/delete_user.php" target="content-area"><i class="material-icons">delete</i></a></li>
+                        <li id="floating_reset_account"><a id="floating_reset_account" class="btn-floating green" href="../pages/reset_account.php" target="content-area"><i class="material-icons">restore</i></a></li>
+                        <li id="floating_change_admin"><a id="floating_change_admin_pass" class="btn-floating blue" href="../pages/change_password.php" target="content-area"><i class="material-icons">change_history</i></a></li>
                         <?php
-                   // }
-                    ?>
-                    <li><a class="btn-floating blue"><i class="material-icons">change_history</i></a></li>
+                    } else if ($_SESSION['roleId'] == 2) {
+                        ?>
+                        <li id="floating_card_application"><a class="btn-floating red" href="../pages/register_card_holder.php" target="content-area"><i class="material-icons">add</i></a></li>
+                        <?php
+                    } else if ($_SESSION['roleId'] == 3) {
+                        ?>
+                        <li id="floating_my_account"><a id="floating_change_admin_pass" class="btn-floating blue" href="../pages/change_password.php" target="content-area"><i class="material-icons">change_history</i></a></li>
+                        <?php
+                    } else if ($_SESSION['roleId'] == 4) {
+                        ?>
+                        <li id="floating_card_application"><a class="btn-floating red" href="../pages/register_card_holder.php" target="content-area"><i class="material-icons">add</i></a></li>
+                        <?php
+                        }
+                        ?>
+
                 </ul>
-            </div>-->
+            </div>
             <?php
         } else {
             ?>

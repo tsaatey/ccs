@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS credit_card(
     card_number VARCHAR(100) PRIMARY KEY,
     issue_date DATE NOT NULL,
     expiry_date DATE NOT NULL,
-    cvv VARCHAR(4) NOT NULL UNIQUE,
+    cvv VARCHAR(4) NOT NULL,
     issuerId INTEGER NOT NULL,
     holderId VARCHAR(20) NOT NULL,
     CONSTRAINT isid FOREIGN KEY(issuerId) REFERENCES credit_card_issuer(id) ON UPDATE CASCADE,

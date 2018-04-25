@@ -10,7 +10,7 @@
     <li><a href="#" class="selected" id="dashboard">Dashboard</a></li>
     <li><a class='dropdown-trigger' href='#' data-target='dropdown3'>Shopping History</a></li>
     <li id="customer_report_link"><a id = "customer_report_link_tab" href='../pages/specific_report.php' target="content-area">Report</a></li>
-    <li id="my_account_link"><a id="my_account_link" href="../pages/change_password.php" target="content-area">Account Settings</a></li>
+    <li id="my_account_link"><a id="my_account_link_tab" href="../pages/change_password.php" target="content-area">Account Settings</a></li>
 </ul>
 
 <!-- Dropdown Structure -->

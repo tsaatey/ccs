@@ -390,7 +390,125 @@
             $('#customer_report_link_tab').addClass('selected');
         });
     }
-
+    
+    var addUserFloatingButton = document.getElementById('floating_admin_add_user');
+    if (addUserFloatingButton) {
+        addUserFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            iframe.style.height = '900px';
+            $('#dashboard').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#admin_new_user').addClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+        });
+    }
+    
+    var deleteUserFloatingButton = document.getElementById('floating_delete_user');
+    if (deleteUserFloatingButton) {
+        deleteUserFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '900px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').addClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+        });
+    }
+    
+    var resetAccountFloatingButton = document.getElementById('floating_reset_account');
+    if (resetAccountFloatingButton) {
+        resetAccountFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '900px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').addClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+        });
+    }
+    
+    var changePasswordFloatingButton = document.getElementById('floating_change_admin');
+    if (changePasswordFloatingButton) {
+        changePasswordFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '400px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').addClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
+        });
+    }
+    
+    var cardApplicationFloatingButton = document.getElementById('floating_card_application');
+    if (cardApplicationFloatingButton) {
+        cardApplicationFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#card_application_tab').addClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').addClass('selected');
+            $('#my_account_link_tab').removeClass('selected');
+            $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+        });
+    }
+    
+    var myAccountFloatingButton = document.getElementById('floating_my_account');
+    if (myAccountFloatingButton) {
+        myAccountFloatingButton.addEventListener('click', function () {
+            var iframe = document.getElementById('content-area');
+            iframe.style.display = 'block';
+            //iframe.style.height = '1600px';
+            $('#dashboard').removeClass('selected');
+            $('#admin_new_user').removeClass('selected');
+            $('#user_delete').removeClass('selected');
+            $('#iframe-top').css('display', 'block');
+            $('#user_display').css('display', 'none');
+            $('#reset_account').removeClass('selected');
+            $('#change_admin_pass').removeClass('selected');
+            $('#card_application_tab').removeClass('selected');
+            $('#ceo_add_card_company_tab').removeClass('selected');
+            $('#ceo_add_questions_tab').removeClass('selected');
+            $('#specific_transaction_link_tab').removeClass('selected');
+            $('#all_transactions_link_tab').removeClass('selected');
+            $('#specific_report_link_tab').removeClass('selected');
+            $('#multiple_report_link_tab').removeClass('selected');
+            $('#registerd_card_holders_link_tab').removeClass('selected');
+            $('#my_account_link_tab').addClass('selected');
+            $('#retrieve_card_holder_account_link_tab').removeClass('selected');
+            $('#customer_report_link_tab').removeClass('selected');
+        });
+    }
+    
 })();
 
 
