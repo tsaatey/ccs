@@ -114,6 +114,15 @@ CREATE TABLE IF NOT EXISTS security_check_history(
     CONSTRAINT byid FOREIGN KEY(buyer_id) REFERENCES credit_card_holder(id) ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS login_logout_histroy(
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    userId VARCHAR(10) NOT NULL,
+    activity VARCHAR(10) NOT NULL,
+    activity_date DATE NOT NULL,
+    date_time DATETIME NOT NULL,
+    CONSTRAINT user__id FOREIGN KEY(userId) REFERENCES employee(id) ON UPDATE CASCADE
+);
+
 INSERT INTO user_role(rolename) VALUES('Admin');
 INSERT INTO user_role(rolename) VALUES('Employee');
 INSERT INTO user_role(rolename) VALUES('Customer');

@@ -41,7 +41,7 @@ class CrudOperation {
 
     public function userLogin(Account $account) {
         try {
-            $query = $this->connection->prepare("SELECT firstname, roleid FROM employee WHERE email = :email");
+            $query = $this->connection->prepare("SELECT id, firstname, roleid FROM employee WHERE email = :email");
             $query->execute(['email' => $account->getUsername()]);
             if ($query->rowCount() == 0) {
                 $query = $this->connection->prepare("SELECT firstname, roleid FROM credit_card_holder WHERE email = :email");
@@ -75,6 +75,7 @@ class CrudOperation {
                     $_SESSION['firstname'] = $result['firstname'];
                     $_SESSION['roleId'] = $result['roleid'];
                     $_SESSION['username'] = $account->getUsername();
+                    $_SESSION['userId'] = $result['id'];
                 }
 
                 $query = $this->connection->prepare("SELECT username, password, roleid FROM account WHERE username = :username AND password = :password");
@@ -91,8 +92,8 @@ class CrudOperation {
                     if ($query->rowCount() > 0) {
                         $_SESSION['account_reset'] = 1;
                     }
+                    $this->logUserActivity($_SESSION['userId'], 'Logged in');
                     header("Location: ../views/dashboard.php");
-                    $_SESSION['last_activity'] = time();
                     exit();
                 } else {
                     header("Location: ../index.php?wrong_username_password=1");
@@ -1164,6 +1165,24 @@ class CrudOperation {
             }
         } catch (Exception $ex) {
             die($ex->getMessage());
+        }
+    }
+
+    public function logUserActivity($userId, $activity) {
+        try {
+            date_default_timezone_set('Europe/London');
+            $dateTime = new DateTime();
+            $date_time = $dateTime->format('Y-m-d H:i:s');
+            $query = $this->connection->prepare("INSERT INTO login_logout_histroy(userId, activity, activity_date, date_time) "
+                    . "VALUES (:userId, :activity, :activity_date, :date_time)");
+            $query->execute([
+                'userId' => $userId,
+                'activity' => $activity,
+                'activity_date' => date('Y-m-d'),
+                'date_time' => $date_time
+            ]);
+        } catch (Exception $ex) {
+            
         }
     }
 

@@ -12,6 +12,8 @@ if ($_SESSION['setup_account'] == 1 || $_SESSION['card_holder_account_in_progres
     $_SESSION['account_setup_required'] = 1;
     header("Location: ../views/dashboard.php");
 } else {
+    $crud = new CrudOperation();
+    $crud->logUserActivity($_SESSION['userId'], 'Logged out');
     session_destroy();
     header("Location: ../index.php");
 }

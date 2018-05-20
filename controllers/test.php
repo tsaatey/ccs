@@ -51,9 +51,9 @@
     </head>
     <body>
         <div class="row">
-            <div class="col l2">
+            <div class="col l3">
             </div>
-            <div class="col l8">
+            <div class="col l6">
                 <div class="row">
                     <div class="col l12 m5">
                         <div class="card-panel">
@@ -110,7 +110,7 @@
                                                         <td>
                                                         </td>
                                                         <td>
-                                                            <a class="waves-effect waves-light btn btn-large z-depth-3 modal-trigger pergah-buttons" href="#modal1" onclick="getCarId(<?php ?>)">Rent this Car</a>
+                                                            <a class="waves-effect waves-light btn btn-large z-depth-3 modal-trigger pergah-buttons" href="#modal1">Rent this Car</a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -126,12 +126,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col l2">
+            <div class="col l3">
             </div>
         </div>
 
         <!-- Modal Structure -->
-        <div id="modal1" class="modal modal-fixed-footer" style="width: 700px;">
+        <div id="modal1" class="modal modal-fixed-footer" style="width: 500px; height: 800px;">
             <div class="modal-content">
                 <h5 style="color: #688EB3; font-weight: bold; text-align: center">Please Provide Us with Your Details</h5>
                 <div class="row">
@@ -140,49 +140,42 @@
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">person</i>
                                 <input id="fullname" type="text" name="fullname" class="validate">
-                                <label for="fullname" style="color: #000;">Full name</label>
+                                <label for="fullname" style="color: #000;">Full Name</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">person_pin_circle</i>
-                                <input id="password" type="password" name="password" class="validate">
-                                <label for="password" style="color: #000;">Password</label>
+                                <i class="material-icons prefix">phone</i>
+                                <input id="phone" type="text" name="phone" class="validate">
+                                <label for="phone" style="color: #000;">Phone Number</label>
                             </div>  
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="username" type="text" name="username" class="validate">
-                                <label for="username" style="color: #000;">Username</label>
+                                <i class="material-icons prefix">email</i>
+                                <input id="email" type="email" name="email" class="validate">
+                                <label for="username" style="color: #000;">Email Address</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">person_pin_circle</i>
-                                <input id="password" type="password" name="password" class="validate">
-                                <label for="password" style="color: #000;">Password</label>
+                                <i class="material-icons prefix">date_range</i>
+                                <input id="pick_up_date" type="date" name="pick_up_date" class="validate">
+                                <label for="pick_up_date" style="color: #000;">Pick-up Date</label>
                             </div>  
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="username" type="text" name="username" class="validate">
-                                <label for="username" style="color: #000;">Username</label>
+                                <i class="material-icons prefix">add_location</i>
+                                <input id="location" type="text" name="location" class="validate">
+                                <label for="location" style="color: #000;">Current Address</label>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">person_pin_circle</i>
-                                <input id="password" type="password" name="password" class="validate">
-                                <label for="password" style="color: #000;">Password</label>
-                            </div>  
                         </div>
                         <div class="row">
                             <div class="col m0"></div>
                             <div class="col l12 l12 modal_button">
                                 <div class="input-field l12" style="padding-left: 40px;">
-                                    <button class="btn btn-large submit_button waves-effect waves-light pergah-buttons z-depth-3" type="submit" name="login_button" id="login_button">Finish
+                                    <button class="btn btn-large submit_button waves-effect waves-light pergah-buttons z-depth-3" type="submit" name="login_button" id="login_button">complete
                                         <i class="material-icons right">send</i>
                                     </button>
                                 </div>
@@ -193,18 +186,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <p style="text-align: left; font-style: italic; font-size: 14px;">The details you provide will help us at <a href="http://www.pergah.com" target="_blank">pergah.com</a> to identify you</p>
+                <p style="text-align: center; font-style: italic; font-size: 14px;">The details you provide will help us at <a href="http://www.pergah.com" target="_blank">pergah.com</a> to identify you</p>
             </div>
         </div>
         <script>
             $(document).ready(function () {
                 $('.modal').modal();
             });
-
-            function getCarId(id) {
-                return id;
-            }
-
+            
+            $(document).ready(function () {
+                $('.datepicker').datepicker();
+            });
 
         </script>
 
